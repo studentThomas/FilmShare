@@ -16,5 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         Log.d("MainActivity", "onCreate: ");
+        Log.d("MainActivity", "onCreate: lol");
     }
 }
