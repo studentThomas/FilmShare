@@ -1,13 +1,18 @@
 package com.example.filmshare.datastorage;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.filmshare.domain.Movie;
 
 @Database(entities = {Movie.class}, version = 1)
-public abstract class MovieShareDatabase {
+public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;
     public abstract MovieDao movieDao();
@@ -21,6 +26,33 @@ public abstract class MovieShareDatabase {
                     .build();
         }
         return instance;
+    }
+
+    private static RoomDatabase.Callback roomCallBack = new RoomDatabase.Callback() {
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+            new PopulateMovieAsyncTask(instance).execute();
+        }
+    };
+
+
+    private static class PopulateMovieAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private MovieDao movieDao;
+
+        private PopulateMovieAsyncTask(MovieShareDatabase db) {
+            movieDao = db.movieDao();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            movieDao.insert(new Movie("Movie 1"));
+            movieDao.insert(new Movie("Movie 2"));
+            movieDao.insert(new Movie("Movie 3"));
+
+            return null;
+        }
     }
 
 }
