@@ -2,6 +2,7 @@ package com.example.filmshare.datastorage;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -50,6 +51,7 @@ public abstract class MovieShareDatabase extends RoomDatabase {
             movieDao.insert(new Movie("Movie 1"));
             movieDao.insert(new Movie("Movie 2"));
             movieDao.insert(new Movie("Movie 3"));
+            Log.d("MovieShareDatabase", "onOpen: ");
 
             return null;
         }
