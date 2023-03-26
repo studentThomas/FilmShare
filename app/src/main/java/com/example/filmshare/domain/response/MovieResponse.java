@@ -1,14 +1,16 @@
 package com.example.filmshare.domain.response;
 
 import com.example.filmshare.domain.Movie;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class MovieResponse {
 
-    private List<Movie> meals;
+    @SerializedName("results")
+    private List<Movie> movies;
 
-    public List<Movie> getMeals() {
-        return meals;
+    public List<Movie> getMovies() {
+        return movies;
     }
 }
