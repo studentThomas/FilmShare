@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         ViewModelProvider viewModelProvider = new ViewModelProvider(this);
         movieViewModel = viewModelProvider.get(MovieViewModel.class);
 
-//        movieViewModel = new MovieViewModel(getApplication());
+        //movieViewModel = new MovieViewModel(getApplication());
 
         RecyclerView recyclerMovies = findViewById(R.id.recycler_view_movies);
         LinearLayoutManager layout_meals = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
