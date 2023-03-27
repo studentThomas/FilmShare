@@ -28,13 +28,12 @@ public class Movie {
     private int runtime;
     private String status;
     private String tagline;
-    private boolean video;
     @SerializedName("vote_average")
     private double voteAverage;
     @SerializedName("vote_count")
     private int voteCount;
 
-    public Movie(String backdropPath, int budget, String language, String title, String overview, double popularity, String posterPath, String releaseDate, int revenue, int runtime, String status, String tagline, boolean video, double voteAverage, int voteCount) {
+    public Movie(String backdropPath, int budget, String language, String title, String overview, double popularity, String posterPath, String releaseDate, int revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
         this.backdropPath = backdropPath;
         this.budget = budget;
         this.language = language;
@@ -47,7 +46,6 @@ public class Movie {
         this.runtime = runtime;
         this.status = status;
         this.tagline = tagline;
-        this.video = video;
         this.voteAverage = voteAverage;
         this.voteCount = voteCount;
     }
@@ -108,9 +106,6 @@ public class Movie {
         return tagline;
     }
 
-    public boolean isVideo() {
-        return video;
-    }
 
     public double getVoteAverage() {
         return voteAverage;
@@ -136,7 +131,6 @@ public class Movie {
                 ", runtime=" + runtime +
                 ", status='" + status + '\'' +
                 ", tagline='" + tagline + '\'' +
-                ", video=" + video +
                 ", voteAverage=" + voteAverage +
                 ", voteCount=" + voteCount +
                 '}';
