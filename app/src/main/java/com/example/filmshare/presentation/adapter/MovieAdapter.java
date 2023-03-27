@@ -32,10 +32,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder mealViewHolder, int position) {
-        Movie currentMeal = movies.get(position);
-        mealViewHolder.movieTitle.setText(currentMeal.getTitle());
+    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int position) {
+        Movie currentMovie = movies.get(position);
+        movieViewHolder.movieTitle.setText(currentMovie.getTitle());
+        movieViewHolder.movieOverview.setText(currentMovie.getOverview());
 
+
+        String imageUrl = "https://image.tmdb.org/t/p/w500" + currentMovie.getBackdropPath();
+
+        Glide.with(movieViewHolder.movieImage.getContext())
+                .load(imageUrl)
+                .into(movieViewHolder.movieImage);
     }
 
     @Override
@@ -51,12 +58,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView movieTitle;
+        private TextView movieOverview;
+        private ImageView movieImage;
 
 
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             movieTitle = itemView.findViewById(R.id.movie_title);
+            movieOverview = itemView.findViewById(R.id.movie_overview);
+            movieImage = itemView.findViewById(R.id.movie_image);
 
             itemView.setOnClickListener(this);
         }

@@ -8,6 +8,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
+        <ImageView
+            android:id="@+id/movie_image"
+            android:layout_width="match_parent"
+            android:layout_height="220sp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"/>
 
         <TextView
             android:id="@+id/movie_title"
@@ -16,6 +22,15 @@
             android:text="@string/movie_title"
             android:textColor="#000000"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/movie_overview"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/movie_overview"
+            android:textSize="15sp"
+            />
 
 
     </LinearLayout>

@@ -21,11 +21,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Database(entities = {Movie.class}, version = 1)
+@Database(entities = {Movie.class}, version = 3)
 public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;
     public abstract MovieDao movieDao();
+
+
+
 
     public static synchronized MovieShareDatabase getInstance(Context context) {
         if (instance == null) {
@@ -56,8 +59,6 @@ public abstract class MovieShareDatabase extends RoomDatabase {
         }
 
 
-
-
         @Override
         protected Void doInBackground(Void... voids) {
             movieDao.deleteAllMovies();
@@ -71,9 +72,7 @@ public abstract class MovieShareDatabase extends RoomDatabase {
             MovieShareApi movieShareApi = retrofit.create(MovieShareApi.class);
 
 
-
             String key = "b524ecf04a4dde849cafa595bf86982b";
-
 
             Call<MovieResponse> call = movieShareApi.getMovies(key);
 
@@ -92,12 +91,6 @@ public abstract class MovieShareDatabase extends RoomDatabase {
             return null;
         }
 
-
-
-
-
-
         }
-
 
 }

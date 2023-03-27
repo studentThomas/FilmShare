@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for (Movie movie : movies) {
                     Log.d("Movie", "Print all movies");
-                    Log.d("Movie", movie.getTitle());
+                    Log.d("Movie", movie.toString());
                 }
 
             }
