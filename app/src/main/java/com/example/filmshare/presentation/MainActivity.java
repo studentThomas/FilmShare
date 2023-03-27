@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(recyclerMovies, String.valueOf(movies.size() + " Movies read"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                for (Movie movie : movies) {
-                    Log.d("Movie", "Print all movies");
-                    Log.d("Movie", movie.toString());
-                }
+//                for (Movie movie : movies) {
+//                    Log.d("Movie", "Print all movies");
+//                    Log.d("Movie", movie.toString());
+//                }
 
             }
         };
