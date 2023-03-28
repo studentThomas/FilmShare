@@ -2,4 +2,36 @@
     <string name="app_name">FilmShare</string>
     <string name="movie_title">movie title</string>
     <string name="movie_overview">movie overview</string>
+
+    //Spinner
+    <string-array name="Genre">
+        <item>Alle</item>
+        <item>Actie</item>
+        <item>Avontuur</item>
+        <item>Animatie</item>
+        <item>Biografie</item>
+        <item>Comedy</item>
+        <item>Documentaire</item>
+        <item>Drama</item>
+        <item>Familie</item>
+        <item>Fantasy</item>
+        <item>Geschiedenis</item>
+        <item>Horror</item>
+        <item>Komedie</item>
+        <item>Misdaad</item>
+        <item>Muziek</item>
+        <item>Mysterie</item>
+        <item>Romantiek</item>
+        <item>Science Fiction</item>
+        <item>Thriller</item>
+        <item>Western</item>
+    </string-array>
+
+    <string-array name="Sorteren">
+        <item>Meest Populair</item>
+        <item>Hoogste Rating</item>
+        <item>Laagste Rating</item>
+        <item>Meest Bekeken</item>
+        <item>Laagste Bekeken</item>
+    </string-array>
 </resources>

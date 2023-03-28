@@ -10,6 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.filmshare.R;
 import com.example.filmshare.domain.Movie;
@@ -21,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private MovieViewModel movieViewModel;
 
@@ -29,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Spinner spinner_genre = findViewById(R.id.spinnerGenre);
+        ArrayAdapter<CharSequence> adapter_genre = ArrayAdapter.createFromResource(this, R.array.Genre, android.R.layout.simple_spinner_item);
+        adapter_genre.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_genre.setAdapter(adapter_genre);
+        spinner_genre.setOnItemSelectedListener(this);
+
+        Spinner spinner_sorteren = findViewById(R.id.spinnerSorteren);
+        ArrayAdapter<CharSequence> adapter_sorteren = ArrayAdapter.createFromResource(this, R.array.Sorteren, android.R.layout.simple_spinner_item);
+        adapter_sorteren.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_sorteren.setAdapter(adapter_sorteren);
+        spinner_sorteren.setOnItemSelectedListener(this);
 
 
         Log.d("MovieShareDatabase", "onOpen: ");
@@ -63,5 +80,16 @@ public class MainActivity extends AppCompatActivity {
         };
 
         movieViewModel.getAllMovies().observe(this, moviesObserver);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String text = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
