@@ -32,7 +32,6 @@
                 android:layout_marginTop="32dp"
                 android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
                 android:popupElevation="3dp"
-                android:background="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/textinput_sorteren"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +42,7 @@
                     android:id="@+id/textview_genre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,7 +54,7 @@
                 android:layout_marginTop="32dp"
                 android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
                 android:popupElevation="3dp"
-                android:background="@color/white"
+
                 app:layout_constraintStart_toEndOf="@+id/textinput_genre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -65,6 +65,7 @@
                 android:id="@+id/textview_sorteren"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:inputType="none"/>
 
             </com.google.android.material.textfield.TextInputLayout>
