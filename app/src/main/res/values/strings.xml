@@ -2,8 +2,12 @@
     <string name="app_name">FilmShare</string>
     <string name="movie_title">movie title</string>
     <string name="movie_overview">movie overview</string>
+<<<<<<< HEAD
     <string name="genre">Genre</string>
     <string name="sorteer">Sorteer</string>
+=======
+    <string name="movie_description">Film beschrijving</string>
+>>>>>>> 4706beccf44cb37572961e34f1f3eb01065f54be
 
     //Spinner
     <string-array name="Genre">
