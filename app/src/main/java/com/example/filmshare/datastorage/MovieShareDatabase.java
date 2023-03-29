@@ -11,7 +11,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.filmshare.domain.Movie;
-import com.example.filmshare.domain.RequestToken;
+import com.example.filmshare.domain.response.TokenResponse;
 import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.MovieResponse;
 
@@ -121,12 +121,12 @@ public abstract class MovieShareDatabase extends RoomDatabase {
 
             String key = "b524ecf04a4dde849cafa595bf86982b";
 
-            Call<RequestToken> call = movieShareApi.getRequestToken(key);
+            Call<TokenResponse> call = movieShareApi.getRequestToken(key);
 
             try {
-                Response<RequestToken> response = call.execute();
+                Response<TokenResponse> response = call.execute();
                 if (response.isSuccessful()) {
-                    RequestToken result = response.body();
+                    TokenResponse result = response.body();
                     String token = result.getRequestToken();
                     Log.d("token", "Hier is de token:");
                     Log.d("token", token);

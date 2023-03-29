@@ -1,12 +1,17 @@
 package com.example.filmshare.datastorage;
 
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.Call;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-import com.example.filmshare.domain.RequestToken;
-import com.example.filmshare.domain.User;
+import com.example.filmshare.domain.SessionRequest;
+import com.example.filmshare.domain.response.SessionResponse;
+import com.example.filmshare.domain.response.TokenResponse;
 import com.example.filmshare.domain.response.MovieResponse;
+
+import java.util.Map;
 
 public interface MovieShareApi {
 
@@ -14,5 +19,9 @@ public interface MovieShareApi {
     Call<MovieResponse> getMovies(@Query("api_key") String key);
 
     @GET("authentication/token/new")
-    Call<RequestToken> getRequestToken(@Query("api_key") String key);
+    Call<TokenResponse> getRequestToken(@Query("api_key") String key);
+
+    @POST("authentication/session/new")
+    Call<SessionResponse> createSession(@Query("api_key") String apiKey, @Body SessionRequest requestBody);
+
 }
