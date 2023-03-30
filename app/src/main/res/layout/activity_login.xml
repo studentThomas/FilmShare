@@ -9,10 +9,18 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="337dp"
+        android:layout_height="43dp"
         android:text="Login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="337dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/screenshot__22_"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
