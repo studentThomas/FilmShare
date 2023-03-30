@@ -55,7 +55,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
 
-        Log.d("MainActivity", "sessionId: " + SessionManager.getInstance().getSessionId());
+//        Log.d("MainActivity", "sessionId: " + SessionManager.getInstance().getSessionId());
+//        Log.d("MainActivity", "userId: " + SessionManager.getInstance().getUserId());
+
 
         //Bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_navigator);
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public boolean onQueryTextSubmit(String query) {
                 if (!isToastDisplayed) {
                     Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
+
                     isToastDisplayed = true;
                 }
                 return true;

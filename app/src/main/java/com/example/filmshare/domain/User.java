@@ -1,21 +1,9 @@
 package com.example.filmshare.domain;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "user_table")
 public class User {
-
-    @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String token;
-
-    public User(String token) {
-        this.token = token;
-    }
-
-    public void setId(int id) {
+    public User(int id) {
         this.id = id;
     }
 
@@ -23,8 +11,7 @@ public class User {
         return id;
     }
 
-    public String getToken() {
-        return token;
+    public void setId(int id) {
+        this.id = id;
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.filmshare.logic;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.filmshare.datastorage.MovieShareApi;
+import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.SessionRequest;
 import com.example.filmshare.domain.response.SessionResponse;
 import com.example.filmshare.domain.response.TokenResponse;
@@ -90,7 +92,9 @@ public class AuthViewModel extends ViewModel {
                     SessionResponse sessionResponse = response.body();
                     String sessionId = sessionResponse.getSessionId();
 
+
                     SessionManager.getInstance().setSessionId(sessionId);
+                    getUserId();
 
                     Log.d("messageid", "sessionId:" + sessionId);
                     Intent intent = new Intent(context, MainActivity.class);
@@ -105,6 +109,29 @@ public class AuthViewModel extends ViewModel {
             @Override
             public void onFailure(Call<SessionResponse> call, Throwable t) {
                 Log.d("messageid", "error:" + t.getMessage());
+            }
+        });
+    }
+
+    public void getUserId() {
+        String sessionId = SessionManager.getInstance().getSessionId();
+        Call<User> call = movieShareApi.getAccountDetails(sessionId, apiKey);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User user = response.body();
+                    int userId = user.getId();
+                    SessionManager.getInstance().setUserId(userId);
+                    Log.d("userid", "userId:" + userId);
+                } else {
+                    Log.d("userid", "error:" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d("userid", "error:" + t.getMessage());
             }
         });
     }

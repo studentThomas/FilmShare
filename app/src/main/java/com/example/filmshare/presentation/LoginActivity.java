@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 authViewModel.createSession(authViewModel.getRequestToken(), LoginActivity.this);
+
 //                Toast.makeText(LoginActivity.this, "sessionid:" + authViewModel.getSessionId(), Toast.LENGTH_SHORT).show();
 
 //                Intent intent = new Intent(LoginActivity.this, MainActivity.class);

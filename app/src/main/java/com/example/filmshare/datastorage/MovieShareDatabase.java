@@ -12,7 +12,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.response.TokenResponse;
-import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.MovieResponse;
 
 import java.io.IOException;
@@ -23,12 +22,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Database(entities = {Movie.class, User.class}, version = 5)
+@Database(entities = {Movie.class}, version = 6)
 public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;
     public abstract MovieDao movieDao();
-    public abstract UserDao userDao();
+
 
 
 
