@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         autoCompleteTextViewGenre.setAdapter(arrayAdapterGenre);
 
-        autoCompleteTextViewSorteren = findViewById(R.id.textview_sorteren);
+        autoCompleteTextViewSorteren = findViewById(R.id.textview_sort);
         arrayAdapterSorteren = new ArrayAdapter<String>(this, R.layout.spinner_list_item, getResources().getStringArray(R.array.Sorteren));
 
         autoCompleteTextViewSorteren.setAdapter(arrayAdapterSorteren);

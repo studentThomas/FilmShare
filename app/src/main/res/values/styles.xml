@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar"/>
     <style name="seperator">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>

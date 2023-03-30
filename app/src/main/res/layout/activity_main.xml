@@ -32,7 +32,7 @@
                 android:layout_marginTop="32dp"
                 android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
                 android:popupElevation="3dp"
-                app:layout_constraintEnd_toStartOf="@+id/textinput_sorteren"
+                app:layout_constraintEnd_toStartOf="@+id/textinput_sort"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/genre"
@@ -47,7 +47,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textinput_sorteren"
+                android:id="@+id/textinput_sort"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
@@ -58,11 +58,11 @@
                 app:layout_constraintStart_toEndOf="@+id/textinput_genre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/sorteer"
+                android:hint="@string/sort"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
             <AutoCompleteTextView
-                android:id="@+id/textview_sorteren"
+                android:id="@+id/textview_sort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
