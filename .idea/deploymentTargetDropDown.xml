@@ -1,43 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="deploymentTargetDropDown">
-<<<<<<< Updated upstream
-<<<<<<< HEAD
     <runningDeviceTargetSelectedWithDropDown>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="RF8TA049BPH" />
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\levik\.android\avd\Pixel_6_API_30.avd" />
           </Key>
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-03-29T11:49:26.053801Z" />
-=======
-=======
->>>>>>> Stashed changes
-    <targetSelectedWithDropDown>
-      <Target>
-        <type value="QUICK_BOOT_TARGET" />
-        <deviceKey>
-          <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-<<<<<<< Updated upstream
-            <value value="C:\Users\janpa\.android\avd\Pixel_5_API_30.avd" />
-=======
-            <value value="$PROJECT_DIR$/../.android/avd/Pixel_5_API_33.avd" />
->>>>>>> Stashed changes
-          </Key>
-        </deviceKey>
-      </Target>
-    </targetSelectedWithDropDown>
-<<<<<<< Updated upstream
-    <timeTargetWasSelectedWithDropDown value="2023-03-29T16:21:18.388486300Z" />
->>>>>>> 4706beccf44cb37572961e34f1f3eb01065f54be
-=======
-    <timeTargetWasSelectedWithDropDown value="2023-03-29T18:42:15.395100Z" />
->>>>>>> Stashed changes
+    <timeTargetWasSelectedWithDropDown value="2023-03-30T07:34:19.669099500Z" />
   </component>
 </project>
