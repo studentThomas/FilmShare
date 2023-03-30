@@ -1,4 +1,4 @@
-package com.example.filmshare.domain;
+package com.example.filmshare.domain.response;
 
 import com.google.gson.annotations.SerializedName;
 

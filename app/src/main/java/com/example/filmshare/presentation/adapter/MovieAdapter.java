@@ -78,6 +78,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             Movie currentMeal = movies.get(getAdapterPosition());
             Intent intent = new Intent(view.getContext(), MovieActivity.class);
             intent.putExtra("title", currentMeal.getTitle());
+            intent.putExtra("overview", currentMeal.getOverview());
 
             view.getContext().startActivity(intent);
 

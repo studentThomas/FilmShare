@@ -16,7 +16,11 @@ public class MovieActivity extends AppCompatActivity {
 
 
         TextView title = findViewById(R.id.movie_title);
+        TextView overview = findViewById(R.id.movie_overview);
+        TextView language = findViewById(R.id.movie_language);
 
         title.setText(getIntent().getStringExtra("title"));
+        overview.setText(getIntent().getStringExtra("overview"));
+        language.setText(getIntent().getStringExtra("language"));
     }
 }

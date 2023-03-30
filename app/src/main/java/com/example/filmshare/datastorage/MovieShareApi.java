@@ -6,12 +6,10 @@ import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-import com.example.filmshare.domain.SessionRequest;
+import com.example.filmshare.domain.response.SessionRequest;
 import com.example.filmshare.domain.response.SessionResponse;
 import com.example.filmshare.domain.response.TokenResponse;
 import com.example.filmshare.domain.response.MovieResponse;
-
-import java.util.Map;
 
 public interface MovieShareApi {
 

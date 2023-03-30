@@ -22,16 +22,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         AuthViewModel authViewModel = new AuthViewModel();
-        TokenResponse tokenResponse = new TokenResponse();
+
 
         Button loginButton = findViewById(R.id.login_button);
 
-        authViewModel.getRequestToken(this);
+        Intent intent = getIntent();
+        Uri data = intent.getData();
+        if (data != null) {
+            Log.d("redirect", "Redirected from: " + data.toString());
+        } else {
+            authViewModel.createRequestToken(this);
+        }
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                authViewModel.createSession(authViewModel.getRequestToken());
+                authViewModel.createSession(authViewModel.getRequestToken(), LoginActivity.this);
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);

@@ -2,19 +2,17 @@ package com.example.filmshare.logic;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
 import com.example.filmshare.datastorage.MovieShareApi;
-import com.example.filmshare.domain.SessionRequest;
+import com.example.filmshare.domain.response.SessionRequest;
 import com.example.filmshare.domain.response.SessionResponse;
 import com.example.filmshare.domain.response.TokenResponse;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.example.filmshare.presentation.LoginActivity;
+import com.example.filmshare.presentation.MainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +24,7 @@ public class AuthViewModel extends ViewModel {
     private MovieShareApi movieShareApi;
     private String apiKey;
     private String requestToken;
+    private boolean isAprroved;
 
     public AuthViewModel() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -35,9 +34,10 @@ public class AuthViewModel extends ViewModel {
 
         movieShareApi = retrofit.create(MovieShareApi.class);
         apiKey = "b524ecf04a4dde849cafa595bf86982b";
+        isAprroved = false;
     }
 
-    public void getRequestToken(Context context) {
+    public void createRequestToken(Context context) {
         Call<TokenResponse> call = movieShareApi.getRequestToken(apiKey);
 
         call.enqueue(new Callback<TokenResponse>() {
@@ -47,14 +47,13 @@ public class AuthViewModel extends ViewModel {
                     TokenResponse tokenResponse = response.body();
                     requestToken = tokenResponse.getRequestToken();
 
-//                    apiKey = requestToken;
-
-                    String url = "https://www.themoviedb.org/authenticate/" + requestToken;
+                    String url = "https://www.themoviedb.org/authenticate/" + requestToken + "?redirect_to=filmshare://auth/approved";
                     Uri webpage = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                     context.startActivity(intent);
                     Log.d("token", "token:" + requestToken);
-                    createSession(requestToken);
+                    isAprroved = true;
+//                    createSession(requestToken);
                 } else {
                     Log.d("token", "token:" + response.errorBody().toString());
                 }
@@ -71,9 +70,14 @@ public class AuthViewModel extends ViewModel {
     }
 
 
-    public void createSession(String requestToken) {
+    public void createSession(String requestToken, Context context) {
 
         Call<SessionResponse> call = movieShareApi.createSession(apiKey, new SessionRequest(requestToken));
+
+//        String url = "https://www.themoviedb.org/authenticate/" + requestToken + "?redirect_to=filmshare://auth/approved";
+//        Uri webpage = Uri.parse(url);
+//        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+//        context.startActivity(intent);
 
 
         Log.d("token", "session stared:");
@@ -83,15 +87,19 @@ public class AuthViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     SessionResponse sessionResponse = response.body();
                     String sessionId = sessionResponse.getSessionId();
-                    Log.d("token", "sessionId:" + sessionId);
+
+                    Log.d("messageid", "sessionId:" + sessionId);
+                    Intent intent = new Intent(context, MainActivity.class);
+                    context.startActivity(intent);
+
                 } else {
-                    Log.d("token", "error:" + response.code());
+                    Log.d("messageid", "error:" + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<SessionResponse> call, Throwable t) {
-                Log.d("token", "error:" + t.getMessage());
+                Log.d("messageid", "error:" + t.getMessage());
             }
         });
     }
@@ -101,6 +109,9 @@ public class AuthViewModel extends ViewModel {
     }
 
 
+    public boolean isAprroved() {
+        return isAprroved;
+    }
 
 
 }

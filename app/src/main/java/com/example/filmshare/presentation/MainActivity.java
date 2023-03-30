@@ -24,7 +24,6 @@ import com.example.filmshare.domain.Movie;
 import com.example.filmshare.logic.MovieViewModel;
 import com.example.filmshare.presentation.adapter.MovieAdapter;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
 
 
 import java.util.List;
