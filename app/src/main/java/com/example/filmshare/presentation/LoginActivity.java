@@ -25,23 +25,27 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Button loginButton = findViewById(R.id.login_button);
+        authViewModel.createRequestToken(this);
 
-        Intent intent = getIntent();
-        Uri data = intent.getData();
-        if (data != null) {
-            Log.d("redirect", "Redirected from: " + data.toString());
-        } else {
-            authViewModel.createRequestToken(this);
-        }
+//        Intent intent = getIntent();
+//        Uri data = intent.getData();
+//        if (data != null) {
+//            Log.d("redirect", "Redirected from: " + data.toString());
+//        } else {
+//            authViewModel.createRequestToken(this);
+//            Log.d("token", "First token created" + authViewModel.getRequestToken());
+//        }
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                authViewModel.createSession(authViewModel.getRequestToken(), LoginActivity.this);
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                authViewModel.createSession(authViewModel.getRequestToken(), LoginActivity.this);
+//                Toast.makeText(LoginActivity.this, "sessionid:" + authViewModel.getSessionId(), Toast.LENGTH_SHORT).show();
+
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
 
             }
         });

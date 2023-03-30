@@ -49,7 +49,6 @@ public abstract class MovieShareDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             new PopulateMovieAsyncTask(instance).execute();
-            new PopulateUserAsyncTask(instance).execute();
         }
     };
 
@@ -97,45 +96,7 @@ public abstract class MovieShareDatabase extends RoomDatabase {
 
         }
 
-    private static class PopulateUserAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        private UserDao userDao;
-
-        private PopulateUserAsyncTask(MovieShareDatabase db) {
-            userDao = db.userDao();
-        }
-
-
-        @Override
-        protected Void doInBackground(Void... voids) {
 
 
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://api.themoviedb.org/3/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            MovieShareApi movieShareApi = retrofit.create(MovieShareApi.class);
-
-
-            String key = "b524ecf04a4dde849cafa595bf86982b";
-
-            Call<TokenResponse> call = movieShareApi.getRequestToken(key);
-
-            try {
-                Response<TokenResponse> response = call.execute();
-                if (response.isSuccessful()) {
-                    TokenResponse result = response.body();
-                    String token = result.getRequestToken();
-                    Log.d("token", "Hier is de token:");
-                    Log.d("token", token);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-    }
 }
