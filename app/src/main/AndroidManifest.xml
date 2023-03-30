@@ -16,24 +16,40 @@
         android:theme="@style/Theme.FilmShare"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".presentation.ListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_list"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".presentation.LoginActivity"
-            android:theme="@style/AppTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="filmshare" android:host="auth" />
+
+                <data
+                    android:host="auth"
+                    android:scheme="filmshare" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.MovieActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".presentation.MainActivity"
-            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".presentation.MovieActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".presentation.MainActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
