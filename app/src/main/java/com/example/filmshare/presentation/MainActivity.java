@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,7 +31,9 @@ import android.widget.Toast;
 
 import com.example.filmshare.R;
 import com.example.filmshare.domain.Movie;
+import com.example.filmshare.logic.AuthViewModel;
 import com.example.filmshare.logic.MovieViewModel;
+import com.example.filmshare.logic.SessionManager;
 import com.example.filmshare.presentation.adapter.MovieAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -41,6 +44,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private MovieViewModel movieViewModel;
+    private SearchView searchView;
+    private boolean isToastDisplayed = false;
 
     BottomNavigationView bottomNavigationView;
 
@@ -59,9 +64,34 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         setContentView(R.layout.activity_main);
 
+
+//        Log.d("MainActivity", "sessionId: " + SessionManager.getInstance().getSessionId());
+//        Log.d("MainActivity", "userId: " + SessionManager.getInstance().getUserId());
+
+
         //Bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.action_home);
+        searchView = findViewById(R.id.search);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!isToastDisplayed) {
+                    Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
+
+                    isToastDisplayed = true;
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                isToastDisplayed = false;
+                return false;
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -1,13 +1,18 @@
 package com.example.filmshare.logic;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.filmshare.datastorage.MovieShareApi;
+import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.SessionRequest;
 import com.example.filmshare.domain.response.SessionResponse;
 import com.example.filmshare.domain.response.TokenResponse;
@@ -24,7 +29,6 @@ public class AuthViewModel extends ViewModel {
     private MovieShareApi movieShareApi;
     private String apiKey;
     private String requestToken;
-    private boolean isAprroved;
 
     public AuthViewModel() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -34,7 +38,6 @@ public class AuthViewModel extends ViewModel {
 
         movieShareApi = retrofit.create(MovieShareApi.class);
         apiKey = "b524ecf04a4dde849cafa595bf86982b";
-        isAprroved = false;
     }
 
     public void createRequestToken(Context context) {
@@ -47,13 +50,13 @@ public class AuthViewModel extends ViewModel {
                     TokenResponse tokenResponse = response.body();
                     requestToken = tokenResponse.getRequestToken();
 
-                    String url = "https://www.themoviedb.org/authenticate/" + requestToken + "?redirect_to=filmshare://auth/approved";
+                    String url = "https://www.themoviedb.org/authenticate/" + requestToken;
+
+//                    String url = "https://www.themoviedb.org/authenticate/" + requestToken + "?redirect_to=filmshare://auth/approved";
                     Uri webpage = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                     context.startActivity(intent);
-                    Log.d("token", "token:" + requestToken);
-                    isAprroved = true;
-//                    createSession(requestToken);
+                    Log.d("token", "token: " + requestToken);
                 } else {
                     Log.d("token", "token:" + response.errorBody().toString());
                 }
@@ -81,6 +84,7 @@ public class AuthViewModel extends ViewModel {
 
 
         Log.d("token", "session stared:");
+//        Log.d("token", requestToken);
         call.enqueue(new Callback<SessionResponse>() {
             @Override
             public void onResponse(Call<SessionResponse> call, Response<SessionResponse> response) {
@@ -88,9 +92,14 @@ public class AuthViewModel extends ViewModel {
                     SessionResponse sessionResponse = response.body();
                     String sessionId = sessionResponse.getSessionId();
 
+
+                    SessionManager.getInstance().setSessionId(sessionId);
+                    getUserId();
+
                     Log.d("messageid", "sessionId:" + sessionId);
                     Intent intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
+
 
                 } else {
                     Log.d("messageid", "error:" + response.code());
@@ -104,14 +113,35 @@ public class AuthViewModel extends ViewModel {
         });
     }
 
+    public void getUserId() {
+        String sessionId = SessionManager.getInstance().getSessionId();
+        Call<User> call = movieShareApi.getAccountDetails(sessionId, apiKey);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User user = response.body();
+                    int userId = user.getId();
+                    SessionManager.getInstance().setUserId(userId);
+                    Log.d("userid", "userId:" + userId);
+                } else {
+                    Log.d("userid", "error:" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d("userid", "error:" + t.getMessage());
+            }
+        });
+    }
+
     public String getRequestToken() {
         return requestToken;
     }
 
 
-    public boolean isAprroved() {
-        return isAprroved;
-    }
+
 
 
 }
