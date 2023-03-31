@@ -59,16 +59,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private TextView overview;
-//        private TextView language;
-//        private TextView runtime;
-//        private TextView budget;
-//        private TextView releaseDate;
-//        private TextView revenue;
-//        private TextView popularity;
-//        private TextView status;
-//        private TextView tagline;
-//        private TextView voteAverage;
-//        private TextView voteCount;
         private ImageView backdrop;
 
 
@@ -78,16 +68,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             super(itemView);
             title = itemView.findViewById(R.id.movie_title);
             overview = itemView.findViewById(R.id.movie_overview);
-//            language = itemView.findViewById(R.id.movie_language);
-//            runtime = itemView.findViewById(R.id.movie_runtime);
-//            budget = itemView.findViewById(R.id.movie_budget);
-//            releaseDate = itemView.findViewById(R.id.movie_releaseDate);
-//            revenue = itemView.findViewById(R.id.movie_revenue);
-//            popularity = itemView.findViewById(R.id.movie_popularity);
-//            status = itemView.findViewById(R.id.movie_status);
-//            tagline = itemView.findViewById(R.id.movie_tagline);
-//            voteAverage = itemView.findViewById(R.id.movie_voteAverage);
-//            voteCount = itemView.findViewById(R.id.movie_voteCount);
             backdrop = itemView.findViewById(R.id.movie_image);
 
 

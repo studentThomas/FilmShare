@@ -150,16 +150,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //movieViewModel = new MovieViewModel(getApplication());
 
         RecyclerView recyclerMovies = findViewById(R.id.recycler_view_movies);
-        LinearLayoutManager layout_meals = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerMovies.setLayoutManager(layout_meals);
-        final MovieAdapter adapterMeals = new MovieAdapter();
-        recyclerMovies.setAdapter(adapterMeals);
+        LinearLayoutManager layout_movies = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerMovies.setLayoutManager(layout_movies);
+        final MovieAdapter adapterMovie = new MovieAdapter();
+        recyclerMovies.setAdapter(adapterMovie);
         recyclerMovies.setHasFixedSize(true);
 
         Observer<List<Movie>> moviesObserver = new Observer<List<Movie>>() {
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
-                adapterMeals.setMovies(movies);
+                adapterMovie.setMovies(movies);
 //                Snackbar.make(recyclerMovies, String.valueOf(movies.size() + " Movies read"), Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 

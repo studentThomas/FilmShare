@@ -26,10 +26,7 @@ public class ListViewModel extends AndroidViewModel {
         listRepository.insert(list);
     }
 
-//    public void deleteAllLists() {
-//        listRepository.deleteAllLists();
-//    }
-//
+
     public LiveData<java.util.List<List>> getAllLists() {
         return listRepository.getAllLists();
     }
