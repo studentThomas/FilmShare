@@ -30,8 +30,8 @@ public class ListViewModel extends AndroidViewModel {
 //        listRepository.deleteAllLists();
 //    }
 //
-//    public LiveData<java.util.List<List>> getAllLists() {
-//        return listRepository.getAllLists();
-//    }
+    public LiveData<java.util.List<List>> getAllLists() {
+        return listRepository.getAllLists();
+    }
 
 }

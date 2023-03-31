@@ -33,9 +33,9 @@ public class ListRepository {
 //        new deleteAllListsAsyncTask(listDao).execute();
 //    }
 
-//    public LiveData<java.util.List<List>> getAllLists() {
-//        return listDao.getAllLists();
-//    }
+    public LiveData<java.util.List<List>> getAllLists() {
+        return listDao.getAllLists();
+    }
 
     private static class insertListAsyncTask extends android.os.AsyncTask<List, Void, Void> {
         private ListDao listDao;

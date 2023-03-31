@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (!isToastDisplayed) {
                     Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
 
+                    Log.d("MainActivity", "userId: " + SessionManager.getInstance().getUserId());
                     isToastDisplayed = true;
                 }
                 return true;
@@ -170,6 +171,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         };
 
+        Log.d("MainActivity", "sessionId: " + SessionManager.getInstance().getSessionId());
+        Log.d("MainActivity", "userId: " + SessionManager.getInstance().getUserId());
+
         movieViewModel.getAllMovies().observe(this, moviesObserver);
     }
 
@@ -183,4 +187,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+
 }
