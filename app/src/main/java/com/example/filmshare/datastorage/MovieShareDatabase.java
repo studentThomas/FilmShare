@@ -22,11 +22,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Database(entities = {Movie.class}, version = 6)
+@Database(entities = {Movie.class, List.class}, version = 6)
 public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;
     public abstract MovieDao movieDao();
+    public abstract ListDao listDao();
+
 
 
 

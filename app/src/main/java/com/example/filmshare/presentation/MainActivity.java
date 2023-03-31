@@ -159,8 +159,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
                 adapterMeals.setMovies(movies);
-                Snackbar.make(recyclerMovies, String.valueOf(movies.size() + " Movies read"), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(recyclerMovies, String.valueOf(movies.size() + " Movies read"), Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
 
 //                for (Movie movie : movies) {
 //                    Log.d("Movie", "Print all movies");

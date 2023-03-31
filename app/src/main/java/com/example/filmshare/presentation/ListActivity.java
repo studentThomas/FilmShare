@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ListActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
+    private Button addListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +30,23 @@ public class ListActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_list);
 
+        addListButton = findViewById(R.id.add_list);
+
         //Bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.action_lists);
+
+
+
+
+        addListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListActivity.this, AddListActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
