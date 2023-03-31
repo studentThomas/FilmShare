@@ -21,7 +21,7 @@
         app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu_bottom" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
