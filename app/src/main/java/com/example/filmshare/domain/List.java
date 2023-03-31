@@ -11,12 +11,14 @@ public class List {
     private int id;
     private String name;
     private String description;
+    private String language;
 
 
 
-    public List(String name, String description) {
+    public List(String name, String description, String language) {
         this.name = name;
         this.description = description;
+        this.language = language;
     }
 
     public void setId(int id) {
@@ -33,6 +35,10 @@ public class List {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getLanguage() {
+        return language;
     }
 
 

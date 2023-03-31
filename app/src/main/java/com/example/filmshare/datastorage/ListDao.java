@@ -9,7 +9,6 @@ import androidx.room.Query;
 
 import com.example.filmshare.domain.List;
 
-import java.util.List;
 
 @Dao
 public interface ListDao {
@@ -20,9 +19,9 @@ public interface ListDao {
     @Delete
     void delete(List list);
 
-    @Query("DELETE FROM list_table")
-    void deleteAllLists();
-
-    @Query("SELECT * FROM list_table ORDER BY id ASC")
-    LiveData<java.util.List<List>> getAllLists();
+//    @Query("DELETE FROM list_table")
+//    void deleteAllLists();
+//
+//    @Query("SELECT * FROM list_table ORDER BY id ASC")
+//    LiveData<java.util.List<List>> getAllLists();
 }

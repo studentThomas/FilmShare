@@ -12,7 +12,6 @@ import com.example.filmshare.datastorage.MovieRepository;
 import com.example.filmshare.datastorage.MovieShareApi;
 import com.example.filmshare.domain.List;
 
-import java.util.List;
 
 public class ListViewModel extends AndroidViewModel {
     private ListRepository listRepository;
@@ -27,12 +26,12 @@ public class ListViewModel extends AndroidViewModel {
         listRepository.insert(list);
     }
 
-    public void deleteAllLists() {
-        listRepository.deleteAllLists();
-    }
-
-    public LiveData<java.util.List<List>> getAllLists() {
-        return listRepository.getAllLists();
-    }
+//    public void deleteAllLists() {
+//        listRepository.deleteAllLists();
+//    }
+//
+//    public LiveData<java.util.List<List>> getAllLists() {
+//        return listRepository.getAllLists();
+//    }
 
 }
