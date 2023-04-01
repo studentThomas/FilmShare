@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MovieActivity">
 
-
     <ImageView
         android:id="@+id/movie_poster"
         android:layout_width="match_parent"
@@ -56,31 +55,57 @@
 
     <TextView
         android:id="@+id/movie_runtime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movie runtime"
-        android:textSize="16sp"
+        android:layout_width="323dp"
+        android:layout_height="56dp"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_overview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Movie runtime"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_overview" />
 
     <TextView
         android:id="@+id/movie_budget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Movie budget"
-        android:textSize="16sp"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_runtime"
+        android:text="Movie budget"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/movie_runtime" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textinput_list"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+        android:hint="@string/lists"
+        android:popupElevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/movie_budget"
+        app:layout_constraintEnd_toEndOf="@+id/movie_language"
+        app:layout_constraintTop_toBottomOf="@+id/movie_language">
+
+        <AutoCompleteTextView
+            android:id="@+id/textview_lists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:inputType="none"
+            android:textColor="@color/black"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/movie_releaseDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movie releaseDate"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/movie_budget"
@@ -92,6 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movie revenue"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/movie_releaseDate"
@@ -103,6 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movie popularity"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/movie_revenue"
@@ -114,6 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movie status"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/movie_popularity"
@@ -125,6 +153,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movie tagline"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/movie_status"
@@ -136,6 +165,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movie voteAverage"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/movie_tagline"
@@ -147,6 +177,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Movie voteCount"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/movie_voteAverage"

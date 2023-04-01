@@ -2,31 +2,80 @@ package com.example.filmshare.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.filmshare.R;
+import com.example.filmshare.datastorage.ListRepository;
+import com.example.filmshare.logic.ListViewModel;
+import com.example.filmshare.presentation.adapter.ListAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    AutoCompleteTextView autoCompleteTextViewLists;
+    ArrayAdapter<String> arrayAdapterLists;
 
+    private ListViewModel listViewModel;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.color_accent));
+        }
         setContentView(R.layout.activity_movie);
 
+        listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+
+        ListRepository listRepository = new ListRepository(getApplication());
+
+        listViewModel.getAllLists().observe(this, viewModelLists -> {
+            List<String> listNames = new ArrayList<>();
+            if (viewModelLists != null) {
+                for (com.example.filmshare.domain.List list : viewModelLists) {
+                    listNames.add(list.getName());
+                }
+            }
+            //Drop down lists
+            autoCompleteTextViewLists = findViewById(R.id.textview_lists);
+            arrayAdapterLists = new ArrayAdapter<String>(this, R.layout.spinner_list_item, listNames);
+            autoCompleteTextViewLists.setAdapter(arrayAdapterLists);
+            autoCompleteTextViewLists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String text = adapterView.getItemAtPosition(i).toString();
+                    Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
+                }
+            });
+            //Drop down lists
+        });
 
         TextView title = findViewById(R.id.movie_title);
         TextView overview = findViewById(R.id.movie_overview);

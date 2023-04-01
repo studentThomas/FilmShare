@@ -14,7 +14,7 @@ import com.example.filmshare.domain.List;
 
 
 public class ListViewModel extends AndroidViewModel {
-    private ListRepository listRepository;
+    private static ListRepository listRepository;
 
     public ListViewModel(@NonNull Application application) {
         super(application);
@@ -27,7 +27,7 @@ public class ListViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<java.util.List<List>> getAllLists() {
+    public static LiveData<java.util.List<List>> getAllLists() {
         return listRepository.getAllLists();
     }
 
