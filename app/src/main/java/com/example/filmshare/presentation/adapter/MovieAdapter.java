@@ -34,15 +34,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int position) {
         Movie currentMovie = movies.get(position);
-        movieViewHolder.movieTitle.setText(currentMovie.getTitle());
-        movieViewHolder.movieOverview.setText(currentMovie.getOverview());
+        movieViewHolder.title.setText(currentMovie.getTitle());
+        movieViewHolder.overview.setText(currentMovie.getOverview());
 
 
         String imageUrl = "https://image.tmdb.org/t/p/w500" + currentMovie.getBackdropPath();
 
-        Glide.with(movieViewHolder.movieImage.getContext())
+        Glide.with(movieViewHolder.backdrop.getContext())
                 .load(imageUrl)
-                .into(movieViewHolder.movieImage);
+                .into(movieViewHolder.backdrop);
     }
 
     @Override
@@ -57,17 +57,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView movieTitle;
-        private TextView movieOverview;
-        private ImageView movieImage;
+        private TextView title;
+        private TextView overview;
+        private ImageView backdrop;
+
 
 
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            movieTitle = itemView.findViewById(R.id.movie_title);
-            movieOverview = itemView.findViewById(R.id.movie_overview);
-            movieImage = itemView.findViewById(R.id.movie_image);
+            title = itemView.findViewById(R.id.movie_title);
+            overview = itemView.findViewById(R.id.movie_overview);
+            backdrop = itemView.findViewById(R.id.movie_image);
+
+
 
             itemView.setOnClickListener(this);
         }
@@ -79,6 +82,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             Intent intent = new Intent(view.getContext(), MovieActivity.class);
             intent.putExtra("title", currentMeal.getTitle());
             intent.putExtra("overview", currentMeal.getOverview());
+            intent.putExtra("language", currentMeal.getLanguage());
+            intent.putExtra("runtime", currentMeal.getRuntime());
+            intent.putExtra("budget", currentMeal.getBudget());
+            intent.putExtra("releaseDate", currentMeal.getReleaseDate());
+            intent.putExtra("revenue", currentMeal.getRevenue());
+            intent.putExtra("popularity", currentMeal.getPopularity());
+            intent.putExtra("status", currentMeal.getStatus());
+            intent.putExtra("tagline", currentMeal.getTagline());
+            intent.putExtra("voteAverage", currentMeal.getVoteAverage());
+            intent.putExtra("voteCount", currentMeal.getVoteCount());
+            intent.putExtra("backdrop", currentMeal.getBackdropPath());
 
             view.getContext().startActivity(intent);
 

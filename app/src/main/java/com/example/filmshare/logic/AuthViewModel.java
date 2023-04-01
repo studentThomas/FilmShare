@@ -94,11 +94,11 @@ public class AuthViewModel extends ViewModel {
 
 
                     SessionManager.getInstance().setSessionId(sessionId);
-                    getUserId();
+                    getUserId(context);
 
                     Log.d("messageid", "sessionId:" + sessionId);
-                    Intent intent = new Intent(context, MainActivity.class);
-                    context.startActivity(intent);
+//                    Intent intent = new Intent(context, MainActivity.class);
+//                    context.startActivity(intent);
 
 
                 } else {
@@ -113,7 +113,7 @@ public class AuthViewModel extends ViewModel {
         });
     }
 
-    public void getUserId() {
+    public void getUserId(Context context) {
         String sessionId = SessionManager.getInstance().getSessionId();
         Call<User> call = movieShareApi.getAccountDetails(sessionId, apiKey);
         call.enqueue(new Callback<User>() {
@@ -124,6 +124,8 @@ public class AuthViewModel extends ViewModel {
                     int userId = user.getId();
                     SessionManager.getInstance().setUserId(userId);
                     Log.d("userid", "userId:" + userId);
+                    Intent intent = new Intent(context, MainActivity.class);
+                    context.startActivity(intent);
                 } else {
                     Log.d("userid", "error:" + response.code());
                 }

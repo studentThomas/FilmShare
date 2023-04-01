@@ -19,9 +19,9 @@ public interface ListDao {
     @Delete
     void delete(List list);
 
-//    @Query("DELETE FROM list_table")
-//    void deleteAllLists();
+    @Query("DELETE FROM list_table")
+    void deleteAllLists();
 //
-//    @Query("SELECT * FROM list_table ORDER BY id ASC")
-//    LiveData<java.util.List<List>> getAllLists();
+    @Query("SELECT * FROM list_table ORDER BY id ASC")
+    LiveData<java.util.List<List>> getAllLists();
 }

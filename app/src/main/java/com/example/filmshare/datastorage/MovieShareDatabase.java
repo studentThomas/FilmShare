@@ -11,8 +11,9 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.filmshare.domain.Movie;
-import com.example.filmshare.domain.response.TokenResponse;
+import com.example.filmshare.domain.response.ListResponse;
 import com.example.filmshare.domain.response.MovieResponse;
+import com.example.filmshare.logic.SessionManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +22,8 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 @Database(entities = {Movie.class, com.example.filmshare.domain.List.class}, version = 8)
 public abstract class MovieShareDatabase extends RoomDatabase {
@@ -50,6 +53,7 @@ public abstract class MovieShareDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             new PopulateMovieAsyncTask(instance).execute();
+            new PopulateListAsyncTask(instance).execute();
         }
     };
 
@@ -80,6 +84,10 @@ public abstract class MovieShareDatabase extends RoomDatabase {
 
             Call<MovieResponse> call = movieShareApi.getMovies(key);
 
+            int id = SessionManager.getInstance().getUserId();
+
+            Log.d("MovieShareDatabase", "doInBackgroundid: " + id);
+
             try {
                 Response<MovieResponse> response = call.execute();
                 if (response.isSuccessful()) {
@@ -95,7 +103,63 @@ public abstract class MovieShareDatabase extends RoomDatabase {
             return null;
         }
 
+
+
         }
+
+
+    private static class PopulateListAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private ListDao listDao;
+
+        private PopulateListAsyncTask(MovieShareDatabase db) {
+            listDao = db.listDao();
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            listDao.deleteAllLists();
+
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://api.themoviedb.org/3/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            MovieShareApi movieShareApi = retrofit.create(MovieShareApi.class);
+
+
+            String key = "b524ecf04a4dde849cafa595bf86982b";
+            int userId = SessionManager.getInstance().getUserId();
+            String sessionId = SessionManager.getInstance().getSessionId();
+
+            Log.d("MovieShareDatabase", "doInBackground: reading lists");
+
+            Call<ListResponse> call = movieShareApi.getLists(userId, key, sessionId);
+
+            try {
+                Response<ListResponse> response = call.execute();
+                if (response.isSuccessful()) {
+                    ListResponse result = response.body();
+                    List<com.example.filmshare.domain.List> lists = result.getLists();
+                    for (com.example.filmshare.domain.List list : lists) {
+                        Log.d("MovieShareDatabase", "doInBackground: " + list.getName());
+                        listDao.insert(list);
+                    }
+                } else {
+                    Log.d("MovieShareDatabase", "doInBackground: " + response.errorBody().string());
+                    Log.d("MovieShareDatabase", "error:" + response.code());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+
+    }
 
 
 
