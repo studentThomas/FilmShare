@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 public class ListResponse {
 
     @SerializedName("results")
-    private java.util.List<List> results;
+    private java.util.List<List> lists;
 
     public java.util.List<List> getLists() {
-        return results;
+        return lists;
     }
 }

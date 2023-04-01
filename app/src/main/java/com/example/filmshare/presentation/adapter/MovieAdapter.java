@@ -94,6 +94,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             intent.putExtra("voteCount", currentMeal.getVoteCount());
             intent.putExtra("backdrop", currentMeal.getBackdropPath());
 
+            intent.putExtra("id", currentMeal.getId());
+
             view.getContext().startActivity(intent);
 
         }

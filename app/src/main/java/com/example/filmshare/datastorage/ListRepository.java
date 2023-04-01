@@ -46,7 +46,7 @@ public class ListRepository {
 
         @Override
         protected Void doInBackground(List... lists) {
-//            listDao.insert(lists[0]);
+            listDao.insert(lists[0]);
 
 
             List list = new List(lists[0].getName(), lists[0].getDescription(), lists[0].getLanguage());

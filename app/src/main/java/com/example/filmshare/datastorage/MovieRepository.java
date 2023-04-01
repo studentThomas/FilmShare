@@ -25,6 +25,7 @@ public class MovieRepository {
     }
 
 
+
     public void deleteAllMovies()  {
         new deleteAllMoviesAsyncTask(movieDao).execute();
     }
@@ -48,4 +49,6 @@ public class MovieRepository {
             return null;
         }
     }
+
+
 }

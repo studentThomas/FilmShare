@@ -14,9 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+<<<<<<< HEAD
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+=======
+import android.widget.Button;
+>>>>>>> 820071052415fab71b1ef7e1573ff14dbde54407
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,9 +28,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.filmshare.R;
+<<<<<<< HEAD
 import com.example.filmshare.datastorage.ListRepository;
 import com.example.filmshare.logic.ListViewModel;
 import com.example.filmshare.presentation.adapter.ListAdapter;
+=======
+import com.example.filmshare.domain.ListItem;
+import com.example.filmshare.logic.ListItemViewModel;
+>>>>>>> 820071052415fab71b1ef7e1573ff14dbde54407
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Array;
@@ -35,9 +44,14 @@ import java.util.List;
 
 public class MovieActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
     BottomNavigationView bottomNavigationView;
     AutoCompleteTextView autoCompleteTextViewLists;
     ArrayAdapter<String> arrayAdapterLists;
+=======
+    private Button addMovieButton;
+    private ListItemViewModel listItemViewModel;
+>>>>>>> 820071052415fab71b1ef7e1573ff14dbde54407
 
     private ListViewModel listViewModel;
 
@@ -77,19 +91,22 @@ public class MovieActivity extends AppCompatActivity {
             //Drop down lists
         });
 
+        addMovieButton = findViewById(R.id.add_movie);
+        listItemViewModel = new ListItemViewModel(getApplication());
+
         TextView title = findViewById(R.id.movie_title);
         TextView overview = findViewById(R.id.movie_overview);
         TextView language = findViewById(R.id.movie_language);
         ImageView backdrop = findViewById(R.id.movie_poster);
-        TextView runtime = findViewById(R.id.movie_runtime);
-        TextView budget = findViewById(R.id.movie_budget);
-        TextView releaseDate = findViewById(R.id.movie_releaseDate);
-        TextView revenue = findViewById(R.id.movie_revenue);
-        TextView popularity = findViewById(R.id.movie_popularity);
-        TextView status = findViewById(R.id.movie_status);
-        TextView tagline = findViewById(R.id.movie_tagline);
-        TextView voteAverage = findViewById(R.id.movie_voteAverage);
-        TextView voteCount = findViewById(R.id.movie_voteCount);
+//        TextView runtime = findViewById(R.id.movie_runtime);
+//        TextView budget = findViewById(R.id.movie_budget);
+//        TextView releaseDate = findViewById(R.id.movie_releaseDate);
+//        TextView revenue = findViewById(R.id.movie_revenue);
+//        TextView popularity = findViewById(R.id.movie_popularity);
+//        TextView status = findViewById(R.id.movie_status);
+//        TextView tagline = findViewById(R.id.movie_tagline);
+//        TextView voteAverage = findViewById(R.id.movie_voteAverage);
+//        TextView voteCount = findViewById(R.id.movie_voteCount);
 
         title.setText(getIntent().getStringExtra("title"));
         overview.setText(getIntent().getStringExtra("overview"));
@@ -110,15 +127,24 @@ public class MovieActivity extends AppCompatActivity {
 
 
 
-        runtime.setText(getIntent().getStringExtra("runtime"));
-        budget.setText(getIntent().getStringExtra("budget"));
-        releaseDate.setText(getIntent().getStringExtra("releaseDate"));
-        revenue.setText(getIntent().getStringExtra("revenue"));
-        popularity.setText(getIntent().getStringExtra("popularity"));
-        status.setText(getIntent().getStringExtra("status"));
-        tagline.setText(getIntent().getStringExtra("tagline"));
-        voteAverage.setText(getIntent().getStringExtra("voteAverage"));
-        voteCount.setText(getIntent().getStringExtra("voteCount"));
+//        runtime.setText(getIntent().getStringExtra("runtime"));
+//        budget.setText(getIntent().getStringExtra("budget"));
+//        releaseDate.setText(getIntent().getStringExtra("releaseDate"));
+//        revenue.setText(getIntent().getStringExtra("revenue"));
+//        popularity.setText(getIntent().getStringExtra("popularity"));
+//        status.setText(getIntent().getStringExtra("status"));
+//        tagline.setText(getIntent().getStringExtra("tagline"));
+//        voteAverage.setText(getIntent().getStringExtra("voteAverage"));
+//        voteCount.setText(getIntent().getStringExtra("voteCount"));
+
+
+
+
+        addMovieButton.setOnClickListener(v -> {
+            int movieId = getIntent().getIntExtra("id", 0);
+            listItemViewModel.insert(new ListItem(8245681, movieId));
+            Log.d("MovieActivity", "Movie added to list: " + movieId);
+        });
 
     }
 }
