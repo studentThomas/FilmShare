@@ -23,5 +23,5 @@ public interface ListItemDao {
     void deleteAllListItems();
     //
     @Query("SELECT * FROM list_item ORDER BY listId DESC")
-    LiveData<java.util.List<ListItem>> getAllListItems();
+    LiveData<java.util.List<ListItem>> getListItems();
 }

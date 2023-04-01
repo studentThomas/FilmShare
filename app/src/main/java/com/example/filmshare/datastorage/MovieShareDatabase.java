@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -114,15 +115,18 @@ public abstract class MovieShareDatabase extends RoomDatabase {
     private static class PopulateListAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private ListDao listDao;
+        private ListItemDao listItemDao;
 
         private PopulateListAsyncTask(MovieShareDatabase db) {
             listDao = db.listDao();
+            listItemDao = db.listItemDao();
         }
 
 
         @Override
         protected Void doInBackground(Void... voids) {
             listDao.deleteAllLists();
+            listItemDao.deleteAllListItems();
 
 
             Retrofit retrofit = new Retrofit.Builder()
@@ -148,6 +152,47 @@ public abstract class MovieShareDatabase extends RoomDatabase {
                     List<com.example.filmshare.domain.List> lists = result.getLists();
                     for (com.example.filmshare.domain.List list : lists) {
                         Log.d("MovieShareDatabase", "doInBackground: " + list.getName());
+
+
+
+                        int listId = list.getId();
+                        Call<MovieResponse> call2 = movieShareApi.getListItems(listId, key);
+                        try {
+                            Response<MovieResponse> response2 = call2.execute();
+                            if (response.isSuccessful()) {
+                                MovieResponse result2 = response2.body();
+                                List<Movie> movies = result2.getListItems();
+                                for (Movie movie : movies) {
+                                    Log.d("ListRepository", "doInBackground: getting list items " + movie.getTitle());
+                                    ListItem listItem = new ListItem(listId, movie.getId());
+                                    listItemDao.insert(listItem);
+                                }
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+//                        call2.execute(new retrofit2.Callback<MovieResponse>() {
+//                            @Override
+//                            public void onResponse(Call<MovieResponse> call2, Response<MovieResponse> response) {
+//                                if (response.isSuccessful()) {
+//                                    MovieResponse result = response.body();
+//                                    List<Movie> movies = result.getListItems();
+//                                    for (Movie movie : movies) {
+//                                        Log.d("ListRepository", "doInBackground: getting list items " + movie.getTitle());
+//                                        ListItem listItem = new ListItem(listId, movie.getId());
+//                                        listItemDao.insert(listItem);
+//                                    }
+//                                } else {
+//                                    Log.d("userid", "error:" + response.code());
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<MovieResponse> call2, Throwable t) {
+//                                Log.d("userid", "error:" + t.getMessage());
+//                            }
+//                        });
                         listDao.insert(list);
                     }
                 } else {

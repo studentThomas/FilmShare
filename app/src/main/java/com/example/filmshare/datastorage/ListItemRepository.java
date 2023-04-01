@@ -1,15 +1,24 @@
 package com.example.filmshare.datastorage;
 
 import android.app.Application;
+import android.content.Intent;
 import android.util.Log;
 
-import com.example.filmshare.domain.List;
+import androidx.lifecycle.LiveData;
+
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
+import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.ListItemRequest;
+import com.example.filmshare.domain.response.MovieResponse;
 import com.example.filmshare.logic.SessionManager;
+import com.example.filmshare.presentation.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +40,16 @@ public class ListItemRepository {
     public void insert(ListItem listItem) {
         new insertListItemAsyncTask(listItemDao).execute(listItem);
     }
+
+    public LiveData<List<ListItem>> getListItems() {
+        return listItemDao.getListItems();
+    }
+
+
+
+
+
+
 
 
     private static class insertListItemAsyncTask extends android.os.AsyncTask<ListItem, Void, Void> {
@@ -86,5 +105,8 @@ public class ListItemRepository {
             return null;
         }
     }
+
+
+
 
 }

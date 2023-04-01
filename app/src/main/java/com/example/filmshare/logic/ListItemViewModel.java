@@ -24,6 +24,14 @@ public class ListItemViewModel extends AndroidViewModel {
         listItemRepository.insert(listItem);
     }
 
+    public LiveData<java.util.List<ListItem>> getListItems() {
+        return listItemRepository.getListItems();
+    }
+
+
+
+
+
 
 
 }

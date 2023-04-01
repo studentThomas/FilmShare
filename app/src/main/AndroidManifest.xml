@@ -15,6 +15,9 @@
         android:theme="@style/Theme.FilmShare"
         tools:targetApi="31">
         <activity
+            android:name=".ListItemsActiviy"
+            android:exported="false" />
+        <activity
             android:name=".presentation.SettingsActivity"
             android:exported="false"
             android:theme="@style/AppTheme" />
@@ -24,7 +27,7 @@
             android:label="@string/title_activity_list"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.LoginActivity"
             android:exported="true"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -37,7 +40,7 @@
             android:name=".presentation.MovieActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.LoginActivity"
+            android:name=".presentation.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".presentation.AddListActivity"
