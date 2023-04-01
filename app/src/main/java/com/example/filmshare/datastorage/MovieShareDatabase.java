@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-@Database(entities = {Movie.class, com.example.filmshare.domain.List.class}, version = 8)
+@Database(entities = {Movie.class, com.example.filmshare.domain.List.class}, version = 12)
 public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;

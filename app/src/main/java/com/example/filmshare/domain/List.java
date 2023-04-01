@@ -1,8 +1,12 @@
 package com.example.filmshare.domain;
 
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import androidx.room.Entity;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "list_table")
 public class List {
@@ -15,11 +19,14 @@ public class List {
 
 
 
+
     public List(String name, String description, String language) {
         this.name = name;
         this.description = description;
         this.language = language;
     }
+
+
 
     public void setId(int id) {
         this.id = id;
@@ -40,6 +47,7 @@ public class List {
     public String getLanguage() {
         return language;
     }
+
 
 
 

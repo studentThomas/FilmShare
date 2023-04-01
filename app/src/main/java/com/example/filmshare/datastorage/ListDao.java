@@ -22,6 +22,6 @@ public interface ListDao {
     @Query("DELETE FROM list_table")
     void deleteAllLists();
 //
-    @Query("SELECT * FROM list_table ORDER BY id ASC")
+    @Query("SELECT * FROM list_table ORDER BY id DESC")
     LiveData<java.util.List<List>> getAllLists();
 }

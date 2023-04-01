@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "movie_table")
 public class Movie {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     private int id;
 
     @SerializedName("backdrop_path")
@@ -33,7 +33,8 @@ public class Movie {
     @SerializedName("vote_count")
     private int voteCount;
 
-    public Movie(String backdropPath, int budget, String language, String title, String overview, double popularity, String posterPath, String releaseDate, int revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
+    public Movie(int id, String backdropPath, int budget, String language, String title, String overview, double popularity, String posterPath, String releaseDate, int revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
+        this.id = id;
         this.backdropPath = backdropPath;
         this.budget = budget;
         this.language = language;

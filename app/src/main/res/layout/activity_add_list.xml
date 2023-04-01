@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:accessibilityLiveRegion="polite"
@@ -25,26 +25,26 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/list_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/list_name"
+        app:layout_constraintTop_toBottomOf="@+id/list_name" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/list_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Language"
         android:inputType="textPersonName"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/list_description"
+        app:layout_constraintTop_toBottomOf="@+id/list_description" />
 
     <EditText
         android:id="@+id/editText"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/list_language" />
 
     <TextView
         android:id="@+id/textView"
@@ -70,7 +70,7 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/list_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText" />
