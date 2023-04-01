@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-<<<<<<< HEAD
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,12 +21,10 @@ import android.widget.AutoCompleteTextView;
 
 import android.widget.Button;
 
-=======
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
->>>>>>> 1628f5cd621f46d5212d7f39d20d402ea953e205
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,7 +32,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.filmshare.R;
-<<<<<<< HEAD
 
 import com.example.filmshare.datastorage.ListRepository;
 import com.example.filmshare.logic.ListViewModel;
@@ -44,13 +40,11 @@ import com.example.filmshare.presentation.adapter.ListAdapter;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.logic.ListItemViewModel;
 
-=======
 import com.example.filmshare.datastorage.ListRepository;
 import com.example.filmshare.logic.ListViewModel;
 import com.example.filmshare.presentation.adapter.ListAdapter;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.logic.ListItemViewModel;
->>>>>>> 1628f5cd621f46d5212d7f39d20d402ea953e205
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Array;
