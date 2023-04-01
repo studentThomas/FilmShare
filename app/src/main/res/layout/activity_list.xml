@@ -25,15 +25,6 @@
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:menu="@menu/menu_bottom" />-->
 
-    <Button
-        android:id="@+id/add_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -76,11 +67,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_lists"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="627dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
             tools:listitem="@layout/movie_item" />
+
+        <Button
+            android:id="@+id/add_list"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            app:icon="@android:drawable/ic_menu_add" />
 
     </LinearLayout>
 
