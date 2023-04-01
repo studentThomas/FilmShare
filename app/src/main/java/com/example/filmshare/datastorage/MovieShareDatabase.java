@@ -1,5 +1,6 @@
 package com.example.filmshare.datastorage;
 
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -10,6 +11,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.response.ListResponse;
 import com.example.filmshare.domain.response.MovieResponse;
@@ -25,12 +27,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-@Database(entities = {Movie.class, com.example.filmshare.domain.List.class}, version = 12)
+@Database(entities = {Movie.class, ListItem.class, com.example.filmshare.domain.List.class}, version = 13)
 public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;
     public abstract MovieDao movieDao();
     public abstract ListDao listDao();
+    public abstract ListItemDao listItemDao();
 
 
 

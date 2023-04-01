@@ -8,7 +8,10 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 import com.example.filmshare.domain.List;
+import com.example.filmshare.domain.ListItem;
+import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.User;
+import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.ListResponse;
 import com.example.filmshare.domain.response.SessionRequest;
 import com.example.filmshare.domain.response.SessionResponse;
@@ -34,6 +37,9 @@ public interface MovieShareApi {
 
     @GET("account/{account_id}/lists")
     Call<ListResponse> getLists(@Path("account_id") int accountId, @Query("api_key") String apiKey, @Query("session_id") String sessionId);
+
+    @POST("list/{list_id}/add_item")
+    Call<ListItem> addListItem(@Path("list_id") int listId, @Query("api_key") String apiKey, @Query("session_id") String sessionId, @Body ListItemRequest requestBody);
 
 
 }
