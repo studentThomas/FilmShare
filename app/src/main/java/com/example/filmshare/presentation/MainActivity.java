@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.example.filmshare.R;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.logic.AuthViewModel;
+import com.example.filmshare.logic.ListItemViewModel;
 import com.example.filmshare.logic.MovieViewModel;
 import com.example.filmshare.logic.SessionManager;
 import com.example.filmshare.presentation.adapter.MovieAdapter;
@@ -64,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         setContentView(R.layout.activity_main);
 
+//        ListItemViewModel listItemViewModel = new ListItemViewModel(getApplication());
+//
+//        listItemViewModel.deleteAllListItems();
+//        listItemViewModel.insertAllListItems(8247038	);
 
 //        Log.d("MainActivity", "sessionId: " + SessionManager.getInstance().getSessionId());
 //        Log.d("MainActivity", "userId: " + SessionManager.getInstance().getUserId());

@@ -41,5 +41,7 @@ public interface MovieShareApi {
     @POST("list/{list_id}/add_item")
     Call<ListItem> addListItem(@Path("list_id") int listId, @Query("api_key") String apiKey, @Query("session_id") String sessionId, @Body ListItemRequest requestBody);
 
+    @GET("list/{list_id}")
+    Call<MovieResponse> getListItems(@Path("list_id") int listId, @Query("api_key") String apiKey);
 
 }
