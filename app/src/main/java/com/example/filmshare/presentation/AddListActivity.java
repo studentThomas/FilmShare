@@ -2,11 +2,8 @@ package com.example.filmshare.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< HEAD
 import android.os.Build;
-=======
 import android.content.Intent;
->>>>>>> 820071052415fab71b1ef7e1573ff14dbde54407
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;

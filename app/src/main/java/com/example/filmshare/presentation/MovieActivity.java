@@ -14,13 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-<<<<<<< HEAD
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-=======
+
 import android.widget.Button;
->>>>>>> 820071052415fab71b1ef7e1573ff14dbde54407
+
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,14 +28,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.filmshare.R;
-<<<<<<< HEAD
+
 import com.example.filmshare.datastorage.ListRepository;
 import com.example.filmshare.logic.ListViewModel;
 import com.example.filmshare.presentation.adapter.ListAdapter;
-=======
+
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.logic.ListItemViewModel;
->>>>>>> 820071052415fab71b1ef7e1573ff14dbde54407
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.lang.reflect.Array;
@@ -44,14 +44,13 @@ import java.util.List;
 
 public class MovieActivity extends AppCompatActivity {
 
-<<<<<<< HEAD
+
     BottomNavigationView bottomNavigationView;
     AutoCompleteTextView autoCompleteTextViewLists;
     ArrayAdapter<String> arrayAdapterLists;
-=======
+
     private Button addMovieButton;
     private ListItemViewModel listItemViewModel;
->>>>>>> 820071052415fab71b1ef7e1573ff14dbde54407
 
     private ListViewModel listViewModel;
 
