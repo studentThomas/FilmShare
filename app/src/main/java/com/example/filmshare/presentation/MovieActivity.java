@@ -6,8 +6,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,6 +55,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.http.GET;
+
 public class MovieActivity extends AppCompatActivity {
 
 
@@ -63,6 +69,10 @@ public class MovieActivity extends AppCompatActivity {
 
     private ListViewModel listViewModel;
 
+    private ImageView fullImage;
+
+    private TextView title;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,8 @@ public class MovieActivity extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.color_accent));
         }
         setContentView(R.layout.activity_movie);
+        fullImage = findViewById(R.id.movie_poster);
+        title = findViewById(R.id.movie_title);
 
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
 
@@ -154,5 +166,27 @@ public class MovieActivity extends AppCompatActivity {
             Log.d("MovieActivity", "Movie added to list: " + movieId);
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_top, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        BitmapDrawable drawable = (BitmapDrawable)fullImage.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Movie", null);
+
+        Uri uri = Uri.parse(bitmapPath);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/png");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, "Hey, check out this movie: " + title.getText().toString() + " on TMDB. https://www.themoviedb.org/movie/" + getIntent().getIntExtra("id", 0));
+        startActivity(Intent.createChooser(intent, "Share"));
+        return super.onOptionsItemSelected(item);
     }
 }
