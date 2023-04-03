@@ -26,6 +26,9 @@ public interface MovieShareApi {
     @GET("movie/{id}")
     Call<Movie> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
 
+    @GET("search/movie")
+    Call<MovieResponse> searchMovies(@Query("api_key") String apiKey, @Query("query") String query);
+
     @GET("authentication/token/new")
     Call<TokenResponse> getRequestToken(@Query("api_key") String key);
 
