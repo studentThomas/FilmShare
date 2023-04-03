@@ -78,17 +78,6 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movie_overview" />
 
-    <TextView
-        android:id="@+id/movie_budget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Movie budget"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movie_runtime" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_list"
@@ -125,17 +114,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/movie_revenue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movie revenue"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_releaseDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/movie_popularity"
@@ -145,33 +123,10 @@
         android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_revenue"
+        app:layout_constraintTop_toBottomOf="@id/movie_budget"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/movie_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movie status"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_popularity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/movie_tagline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movie tagline"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_status"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/movie_voteAverage"
@@ -181,7 +136,7 @@
         android:textColor="#000000"
         android:textSize="16sp"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_tagline"
+        app:layout_constraintTop_toBottomOf="@id/movie_popularity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

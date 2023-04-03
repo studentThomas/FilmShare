@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (!isToastDisplayed) {
                     Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
 
-                    Log.d("MainActivity", "userId: " + SessionManager.getInstance().getUserId());
                     isToastDisplayed = true;
                 }
                 return true;
