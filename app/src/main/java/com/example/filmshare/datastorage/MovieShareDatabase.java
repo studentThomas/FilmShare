@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-@Database(entities = {Movie.class, ListItem.class, com.example.filmshare.domain.List.class}, version = 13)
+@Database(entities = {Movie.class, ListItem.class, com.example.filmshare.domain.List.class}, version = 14)
 public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;
@@ -98,7 +98,11 @@ public abstract class MovieShareDatabase extends RoomDatabase {
                     MovieResponse result = response.body();
                     List<Movie> movies = result.getMovies();
                     for (Movie movie : movies) {
-                        movieDao.insert(movie);
+                        Log.d("MovieShareDatabase", "doInBackground: " + movie.toString());
+                        Call<Movie> detailsCall = movieShareApi.getMovieDetails(movie.getId(), key);
+                        Response<Movie> detailsResponse = detailsCall.execute();
+                        Movie details = detailsResponse.body();
+                        movieDao.insert(details);
                     }
                 }
             } catch (IOException e) {

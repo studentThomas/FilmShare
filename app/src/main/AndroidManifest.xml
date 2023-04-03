@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.filmshare">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -24,7 +25,7 @@
             android:label="@string/title_activity_list"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.LoginActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -37,7 +38,7 @@
             android:name=".presentation.MovieActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.LoginActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".presentation.AddListActivity"

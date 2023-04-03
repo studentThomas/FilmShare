@@ -87,8 +87,6 @@ public class MovieActivity extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.color_accent));
         }
         setContentView(R.layout.activity_movie);
-        fullImage = findViewById(R.id.movie_poster);
-        title = findViewById(R.id.movie_title);
 
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
 
@@ -124,44 +122,28 @@ public class MovieActivity extends AppCompatActivity {
         TextView overview = findViewById(R.id.movie_overview);
         TextView language = findViewById(R.id.movie_language);
         ImageView backdrop = findViewById(R.id.movie_poster);
-//        TextView runtime = findViewById(R.id.movie_runtime);
-//        TextView budget = findViewById(R.id.movie_budget);
-//        TextView releaseDate = findViewById(R.id.movie_releaseDate);
-//        TextView revenue = findViewById(R.id.movie_revenue);
-//        TextView popularity = findViewById(R.id.movie_popularity);
-//        TextView status = findViewById(R.id.movie_status);
-//        TextView tagline = findViewById(R.id.movie_tagline);
-//        TextView voteAverage = findViewById(R.id.movie_voteAverage);
-//        TextView voteCount = findViewById(R.id.movie_voteCount);
+        TextView runtime = findViewById(R.id.movie_runtime);
+        TextView budget = findViewById(R.id.movie_budget);
+        TextView releaseDate = findViewById(R.id.movie_releaseDate);
+        TextView popularity = findViewById(R.id.movie_popularity);
+        TextView voteAverage = findViewById(R.id.movie_voteAverage);
+
 
         title.setText(getIntent().getStringExtra("title"));
-        overview.setText(getIntent().getStringExtra("overview"));
-        language.setText(getIntent().getStringExtra("language"));
-
-
-//        Glide.with(this).load(getIntent().getStringExtra("backdrop")).into(backdrop);
+        overview.setText("Overview: " + getIntent().getStringExtra("overview"));
+        language.setText("Language: " + getIntent().getStringExtra("language"));
 
         String imageUrl = "https://image.tmdb.org/t/p/w500" + getIntent().getStringExtra("backdrop");
-
         Glide.with(backdrop.getContext())
                 .load(imageUrl)
                 .into(backdrop);
 
-//        Glide.with(movieViewHolder.backdrop.getContext())
-//                .load(imageUrl)
-//                .into(movieViewHolder.backdrop);
+        runtime.setText("Runtime: " + getIntent().getIntExtra("runtime", 0));
+        releaseDate.setText("Release date: " + getIntent().getStringExtra("releaseDate"));
+        popularity.setText("Popularity: " + getIntent().getDoubleExtra("popularity", 0));
+        voteAverage.setText("Vote average: " + getIntent().getDoubleExtra("voteAverage", 0));
 
 
-
-//        runtime.setText(getIntent().getStringExtra("runtime"));
-//        budget.setText(getIntent().getStringExtra("budget"));
-//        releaseDate.setText(getIntent().getStringExtra("releaseDate"));
-//        revenue.setText(getIntent().getStringExtra("revenue"));
-//        popularity.setText(getIntent().getStringExtra("popularity"));
-//        status.setText(getIntent().getStringExtra("status"));
-//        tagline.setText(getIntent().getStringExtra("tagline"));
-//        voteAverage.setText(getIntent().getStringExtra("voteAverage"));
-//        voteCount.setText(getIntent().getStringExtra("voteCount"));
 
 
 
