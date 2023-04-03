@@ -70,8 +70,6 @@ public class MovieActivity extends AppCompatActivity {
 
     private ListViewModel listViewModel;
 
-    private ImageView fullImage;
-
     private TextView title;
 
     private int selectedListId = -1;
@@ -107,8 +105,15 @@ public class MovieActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String text = adapterView.getItemAtPosition(i).toString();
-                    Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
                     selectedListId = viewModelLists.get(i).getId();
+                    int movieId = getIntent().getIntExtra("id", 0);
+                    if (!listNames.contains(movieId)) {
+                        listItemViewModel.insert(new ListItem(selectedListId, movieId));
+                        Log.d("MovieActivity", "Movie added to list: " + movieId + " list: " + selectedListId);
+                        Toast.makeText(getApplicationContext(), "Successfully added movie to list", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Movie is already in this list", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -144,21 +149,6 @@ public class MovieActivity extends AppCompatActivity {
         voteAverage.setText("Vote average: " + getIntent().getDoubleExtra("voteAverage", 0));
 
 
-
-
-
-
-        addMovieButton.setOnClickListener(v -> {
-            int movieId = getIntent().getIntExtra("id", 0);
-            if (selectedListId != -1) {
-                listItemViewModel.insert(new ListItem(selectedListId, movieId));
-                Log.d("MovieActivity", "Movie added to list: " + movieId + " list: " + selectedListId);
-            } else {
-                Toast.makeText(this, "Please select a list to add the movie to.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
     }
 
     @Override
@@ -169,7 +159,9 @@ public class MovieActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        BitmapDrawable drawable = (BitmapDrawable)fullImage.getDrawable();
+        ImageView fullImage = findViewById(R.id.movie_poster);
+        TextView title = findViewById(R.id.movie_title);
+        BitmapDrawable drawable = (BitmapDrawable) fullImage.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Movie", null);
 
