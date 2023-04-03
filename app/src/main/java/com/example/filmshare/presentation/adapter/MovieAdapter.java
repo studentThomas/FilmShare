@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.R;
+import com.example.filmshare.presentation.MainActivity;
 import com.example.filmshare.presentation.MovieActivity;
 
 
@@ -56,6 +59,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
 
+
+
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private TextView overview;
@@ -86,7 +91,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             intent.putExtra("runtime", currentMeal.getRuntime());
             intent.putExtra("budget", currentMeal.getBudget());
             intent.putExtra("releaseDate", currentMeal.getReleaseDate());
-            intent.putExtra("revenue", currentMeal.getRevenue());
+//            intent.putExtra("revenue", currentMeal.getRevenue());
             intent.putExtra("popularity", currentMeal.getPopularity());
             intent.putExtra("status", currentMeal.getStatus());
             intent.putExtra("tagline", currentMeal.getTagline());

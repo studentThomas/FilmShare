@@ -24,7 +24,6 @@ public class Movie {
     private String posterPath;
     @SerializedName("release_date")
     private String releaseDate;
-    private int revenue;
     private int runtime;
     private String status;
     private String tagline;
@@ -33,7 +32,7 @@ public class Movie {
     @SerializedName("vote_count")
     private int voteCount;
 
-    public Movie(int id, String backdropPath, int budget, String language, String title, String overview, double popularity, String posterPath, String releaseDate, int revenue, int runtime, String status, String tagline, double voteAverage, int voteCount) {
+    public Movie(int id, String backdropPath, int budget, String language, String title, String overview, double popularity, String posterPath, String releaseDate,  int runtime, String status, String tagline, double voteAverage, int voteCount) {
         this.id = id;
         this.backdropPath = backdropPath;
         this.budget = budget;
@@ -43,7 +42,6 @@ public class Movie {
         this.popularity = popularity;
         this.posterPath = posterPath;
         this.releaseDate = releaseDate;
-        this.revenue = revenue;
         this.runtime = runtime;
         this.status = status;
         this.tagline = tagline;
@@ -91,9 +89,6 @@ public class Movie {
         return releaseDate;
     }
 
-    public int getRevenue() {
-        return revenue;
-    }
 
     public int getRuntime() {
         return runtime;
@@ -128,7 +123,6 @@ public class Movie {
                 ", popularity=" + popularity +
                 ", posterPath='" + posterPath + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
-                ", revenue=" + revenue +
                 ", runtime=" + runtime +
                 ", status='" + status + '\'' +
                 ", tagline='" + tagline + '\'' +
