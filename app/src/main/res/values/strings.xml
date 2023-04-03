@@ -4,38 +4,38 @@
     <string name="movie_overview">movie overview</string>
     <string name="genre">Genre</string>
     <string name="sort">Sort</string>
-    <string name="movie_description">Film beschrijving</string>
+    <string name="movie_description">Movie description</string>
 
     //Spinner
     <string-array name="Genre">
-        <item>Alle</item>
-        <item>Actie</item>
-        <item>Avontuur</item>
-        <item>Animatie</item>
-        <item>Biografie</item>
+        <item>All</item>
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Animation</item>
+        <item>Biography</item>
         <item>Comedy</item>
-        <item>Documentaire</item>
+        <item>Documentary</item>
         <item>Drama</item>
-        <item>Familie</item>
+        <item>Family</item>
         <item>Fantasy</item>
-        <item>Geschiedenis</item>
+        <item>History</item>
         <item>Horror</item>
-        <item>Komedie</item>
-        <item>Misdaad</item>
-        <item>Muziek</item>
-        <item>Mysterie</item>
-        <item>Romantiek</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Music</item>
+        <item>Mystery</item>
+        <item>Romantic</item>
         <item>Science Fiction</item>
         <item>Thriller</item>
         <item>Western</item>
     </string-array>
 
-    <string-array name="Sorteren">
-        <item>Meest Populair</item>
-        <item>Hoogste Rating</item>
-        <item>Laagste Rating</item>
-        <item>Meest Bekeken</item>
-        <item>Laagste Bekeken</item>
+    <string-array name="Sort">
+        <item>Most popular</item>
+        <item>Highest Rating</item>
+        <item>Lowest Rating</item>
+        <item>Most watched</item>
+        <item>Least watched</item>
     </string-array>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
