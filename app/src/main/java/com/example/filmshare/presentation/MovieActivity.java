@@ -74,6 +74,9 @@ public class MovieActivity extends AppCompatActivity {
 
     private TextView title;
 
+    private int selectedListId = -1;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +89,6 @@ public class MovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie);
         fullImage = findViewById(R.id.movie_poster);
         title = findViewById(R.id.movie_title);
-
-
 
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
 
@@ -109,8 +110,10 @@ public class MovieActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String text = adapterView.getItemAtPosition(i).toString();
                     Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
+                    selectedListId = viewModelLists.get(i).getId();
                 }
             });
+
             //Drop down lists
         });
 
@@ -165,9 +168,14 @@ public class MovieActivity extends AppCompatActivity {
 
         addMovieButton.setOnClickListener(v -> {
             int movieId = getIntent().getIntExtra("id", 0);
-            listItemViewModel.insert(new ListItem(8245681, movieId));
-            Log.d("MovieActivity", "Movie added to list: " + movieId);
+            if (selectedListId != -1) {
+                listItemViewModel.insert(new ListItem(selectedListId, movieId));
+                Log.d("MovieActivity", "Movie added to list: " + movieId + " list: " + selectedListId);
+            } else {
+                Toast.makeText(this, "Please select a list to add the movie to.", Toast.LENGTH_SHORT).show();
+            }
         });
+
 
     }
 
