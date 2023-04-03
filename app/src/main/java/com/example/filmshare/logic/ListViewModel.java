@@ -27,7 +27,7 @@ public class ListViewModel extends AndroidViewModel {
     }
 
 
-    public static LiveData<java.util.List<List>> getAllLists() {
+    public LiveData<java.util.List<List>> getAllLists() {
         return listRepository.getAllLists();
     }
 

@@ -15,9 +15,6 @@
         android:theme="@style/Theme.FilmShare"
         tools:targetApi="31">
         <activity
-            android:name=".ListItemsActiviy"
-            android:exported="false" />
-        <activity
             android:name=".presentation.SettingsActivity"
             android:exported="false"
             android:theme="@style/AppTheme" />
@@ -45,6 +42,10 @@
         <activity
             android:name=".presentation.AddListActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".presentation.ListItemsActiviy"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

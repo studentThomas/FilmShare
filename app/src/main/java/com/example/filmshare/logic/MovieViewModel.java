@@ -26,4 +26,12 @@ public class MovieViewModel extends AndroidViewModel {
         return movieRepository.getAllMovies();
     }
 
+    public void deleteAllMovies() {
+        movieRepository.deleteAllMovies();
+    }
+
+    public LiveData<Movie> getMovieById(int id) {
+        return movieRepository.getMovieById(id);
+    }
+
 }

@@ -38,6 +38,7 @@ import com.bumptech.glide.Glide;
 import com.example.filmshare.R;
 
 import com.example.filmshare.datastorage.ListRepository;
+import com.example.filmshare.domain.Movie;
 import com.example.filmshare.logic.ListViewModel;
 import com.example.filmshare.presentation.adapter.ListAdapter;
 
@@ -85,6 +86,8 @@ public class MovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie);
         fullImage = findViewById(R.id.movie_poster);
         title = findViewById(R.id.movie_title);
+
+
 
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
 
