@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
@@ -41,14 +44,51 @@ public class ListItemRepository {
         new insertListItemAsyncTask(listItemDao).execute(listItem);
     }
 
-    public LiveData<List<ListItem>> getListItems() {
-        return listItemDao.getListItems();
+    public LiveData<List<ListItem>> getListItems(int listId) {
+        return listItemDao.getListItems(listId);
+
+
+
+
+
+
+
+//        String key = "b524ecf04a4dde849cafa595bf86982b";
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://api.themoviedb.org/3/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        MovieShareApi service = retrofit.create(MovieShareApi.class);
+
+
+//        for (ListItem listItem : listItems.getValue()) {
+//            Call<MovieResponse> call = service.getMovieById(listItem.getMovieId(), key);
+//            call.enqueue(new Callback<MovieResponse>() {
+//                @Override
+//                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+//                    if (!response.isSuccessful()) {
+//                        Log.d("ListRepository", "onResponse: " + response.code());
+//                        MovieResponse result = response.body();
+//                        List<Movie> movies = result.getMovies();
+//                        listMovies.setValue(movies);
+//                        for (Movie movie : movies) {
+//                            Log.d("ListRepository", "onResponse: " + movie.getTitle());
+//                        }
+//                    }
+//
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<MovieResponse> call, Throwable t) {
+//                    Log.d("ListRepository", "onFailure: " + t.getMessage());
+//                }
+//            });
+//        }
+
     }
-
-
-
-
-
 
 
 

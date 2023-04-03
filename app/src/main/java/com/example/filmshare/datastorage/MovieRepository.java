@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 
+import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.response.MovieResponse;
 
@@ -32,8 +33,12 @@ public class MovieRepository {
 
     public LiveData<List<Movie>> getAllMovies() {
         return movieDao.getAllMovies();
+
     }
 
+    public LiveData<Movie> getMovieById(int movieId) {
+        return movieDao.getMovieById(movieId);
+    }
 
 
     private static class deleteAllMoviesAsyncTask extends android.os.AsyncTask<Movie, Void, Void> {

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.filmshare.R;
+import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.logic.AuthViewModel;
 import com.example.filmshare.logic.ListItemViewModel;
@@ -40,11 +42,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private MovieViewModel movieViewModel;
+    private ListItemViewModel listItemViewModel;
     private SearchView searchView;
     private boolean isToastDisplayed = false;
 
@@ -165,21 +169,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
                 adapterMovie.setMovies(movies);
-//                Snackbar.make(recyclerMovies, String.valueOf(movies.size() + " Movies read"), Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
-//                for (Movie movie : movies) {
-//                    Log.d("Movie", "Print all movies");
-//                    Log.d("Movie", movie.toString());
-//                }
-
             }
         };
 
-        Log.d("MainActivity", "sessionId: " + SessionManager.getInstance().getSessionId());
-        Log.d("MainActivity", "userId: " + SessionManager.getInstance().getUserId());
+//        Observer<List<ListItem>> listitemObserver = new Observer<List<ListItem>>() {
+//            @Override
+//            public void onChanged(@Nullable List<ListItem> listItems) {
+//                List<Movie> movies = new ArrayList<>();
+//
+//                for(ListItem listItem : listItems) {
+//                    int movieId = listItem.getMovieId();
+//                    movieViewModel.getMovieById(movieId).observe(MainActivity.this, new Observer<Movie>() {
+//                        @Override
+//                        public void onChanged(@Nullable Movie movie) {
+//                            if(movie != null) {
+//                                Log.d("MainActivity", "movie: " + movie.getTitle());
+//                                movies.add(movie);
+//                                adapterMovie.setMovies(movies);
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        };
+//
+//        listItemViewModel = new ListItemViewModel(getApplication());
+//        listItemViewModel.getListItems(8245681).observe(this, listitemObserver);
+
+
+
 
         movieViewModel.getAllMovies().observe(this, moviesObserver);
+
     }
 
     @Override

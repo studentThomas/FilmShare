@@ -151,7 +151,7 @@ public abstract class MovieShareDatabase extends RoomDatabase {
                     ListResponse result = response.body();
                     List<com.example.filmshare.domain.List> lists = result.getLists();
                     for (com.example.filmshare.domain.List list : lists) {
-                        Log.d("MovieShareDatabase", "doInBackground: " + list.getName());
+//                        Log.d("MovieShareDatabase", "doInBackground: " + list.getName());
 
 
 
@@ -163,7 +163,7 @@ public abstract class MovieShareDatabase extends RoomDatabase {
                                 MovieResponse result2 = response2.body();
                                 List<Movie> movies = result2.getListItems();
                                 for (Movie movie : movies) {
-                                    Log.d("ListRepository", "doInBackground: getting list items " + movie.getTitle());
+//                                    Log.d("ListRepository", "doInBackground: getting list items " + movie.getTitle());
                                     ListItem listItem = new ListItem(listId, movie.getId());
                                     listItemDao.insert(listItem);
                                 }

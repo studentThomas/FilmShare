@@ -43,6 +43,10 @@
         <activity
             android:name=".presentation.AddListActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".presentation.ListItemsActiviy"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

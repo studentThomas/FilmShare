@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmshare.R;
 import com.example.filmshare.domain.Movie;
+import com.example.filmshare.logic.ListItemViewModel;
 import com.example.filmshare.logic.ListViewModel;
 import com.example.filmshare.logic.SessionManager;
 import com.example.filmshare.presentation.adapter.ListAdapter;
@@ -31,6 +32,7 @@ public class ListActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private Button addListButton;
+    private ListItemViewModel listItemViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class ListActivity extends AppCompatActivity {
 
         ListViewModel listViewModel = new ListViewModel(getApplication());
 
+
+        listItemViewModel = new ListItemViewModel(getApplication());
+        listItemViewModel.getListItems(8245681);
 
         RecyclerView recyclerLists = findViewById(R.id.recycler_view_lists);
         LinearLayoutManager layout_lists = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
