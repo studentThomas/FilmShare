@@ -122,7 +122,7 @@ public class AuthViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     User user = response.body();
                     int userId = user.getId();
-                    SessionManager.getInstance().setUserId(userId);
+                    SessionManager.getInstance().setUserId(18471723);
                     Log.d("userid", "userId:" + userId);
                     Intent intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
