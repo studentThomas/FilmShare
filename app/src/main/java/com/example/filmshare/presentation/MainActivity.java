@@ -163,6 +163,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     movieViewModel.searchMovies(query, new MovieViewModel.SearchMoviesCallback() {
                         @Override
                         public void onMoviesFound(List<Movie> movies) {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
                             adapterMovie.setMovies(movies);
                         }
 
@@ -180,6 +182,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
                     movieViewModel.getAllMovies().observe(MainActivity.this, movies -> adapterMovie.setMovies(movies));
                 }
                 return false;
