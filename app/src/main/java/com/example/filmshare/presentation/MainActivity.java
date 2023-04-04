@@ -21,6 +21,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -171,6 +172,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public boolean onQueryTextChange(String newText) {
 //                adapterMovie.setMovies(movieViewModel.searchMovies(newText));
+                return false;
+            }
+        });
+
+        searchView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
+                    moviesObserver.onChanged(movieViewModel.searchMovies(searchView.getQuery().toString()));
+                    return true;
+                }
                 return false;
             }
         });
