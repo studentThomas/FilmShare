@@ -19,6 +19,7 @@ import com.example.filmshare.logic.AuthViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +39,9 @@ public class LoginActivity extends AppCompatActivity {
 //        Intent intent = getIntent();
 //        Uri data = intent.getData();
 //        if (data != null) {
-//            Log.d("redirect", "Redirected from: " + data.toString());
+//            loginButton.setVisibility(View.VISIBLE);
 //        } else {
-//            authViewModel.createRequestToken(this);
-//            Log.d("token", "First token created" + authViewModel.getRequestToken());
+//            loginButton.setVisibility(View.INVISIBLE);
 //        }
 
 
