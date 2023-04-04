@@ -38,8 +38,11 @@
             android:name=".presentation.MovieActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.LoginActivity"
-            android:theme="@style/AppTheme" />
+            android:name=".presentation.MainActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".presentation.ListItemsActiviy"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".presentation.AddListActivity"
             android:theme="@style/AppTheme" />
