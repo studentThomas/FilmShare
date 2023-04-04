@@ -11,6 +11,7 @@ import com.example.filmshare.domain.List;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.User;
+import com.example.filmshare.domain.response.GenreResponse;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.ListResponse;
 import com.example.filmshare.domain.response.SessionRequest;
@@ -22,6 +23,13 @@ public interface MovieShareApi {
 
     @GET("movie/popular")
     Call<MovieResponse> getMovies(@Query("api_key") String key);
+
+    @GET("discover/movie")
+    Call<MovieResponse> getMoviesByGenre(@Query("api_key") String apiKey, @Query("with_genres") int genreId);
+
+    @GET("genre/movie/list")
+    Call<GenreResponse> getAllGenres(@Query("api_key") String apiKey);
+
 
     @GET("movie/{id}")
     Call<Movie> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);

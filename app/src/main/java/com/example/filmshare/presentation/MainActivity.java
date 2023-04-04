@@ -33,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.filmshare.R;
+import com.example.filmshare.domain.Genre;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.logic.AuthViewModel;
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+
         autoCompleteTextViewSorteren.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -154,12 +156,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         };
 
 
-        movieViewModel.getAllMovies().observe(this, moviesObserver);
+        movieViewModel.getMoviesByGenre(28).observe(this, moviesObserver);
+//        movieViewModel.getAllMovies().observe(this, moviesObserver);
         searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query.length() > 0) {
+                    //code if press enter remove keyboard
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+
                     movieViewModel.searchMovies(query, new MovieViewModel.SearchMoviesCallback() {
                         @Override
                         public void onMoviesFound(List<Movie> movies) {

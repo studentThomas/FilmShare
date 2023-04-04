@@ -134,7 +134,7 @@ public class MovieActivity extends AppCompatActivity {
 
 
         title.setText(getIntent().getStringExtra("title"));
-        overview.setText("Overview: " + getIntent().getStringExtra("overview"));
+        overview.setText(getIntent().getStringExtra("overview"));
         language.setText("Language: " + getIntent().getStringExtra("language"));
 
         String imageUrl = "https://image.tmdb.org/t/p/w500" + getIntent().getStringExtra("backdrop");
