@@ -11,8 +11,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.filmshare.domain.Genre;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
+import com.example.filmshare.domain.response.GenreResponse;
 import com.example.filmshare.domain.response.ListResponse;
 import com.example.filmshare.domain.response.MovieResponse;
 import com.example.filmshare.logic.SessionManager;
@@ -28,13 +30,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-@Database(entities = {Movie.class, ListItem.class, com.example.filmshare.domain.List.class}, version = 14)
+@Database(entities = {Movie.class, ListItem.class, com.example.filmshare.domain.List.class, Genre.class}, version = 15)
 public abstract class MovieShareDatabase extends RoomDatabase {
 
     private static MovieShareDatabase instance;
     public abstract MovieDao movieDao();
     public abstract ListDao listDao();
     public abstract ListItemDao listItemDao();
+    public abstract GenreDao genreDao();
 
 
 
@@ -58,6 +61,7 @@ public abstract class MovieShareDatabase extends RoomDatabase {
             super.onOpen(db);
             new PopulateMovieAsyncTask(instance).execute();
             new PopulateListAsyncTask(instance).execute();
+            new PopulateGenreAsyncTask(instance).execute();
         }
     };
 
@@ -114,6 +118,52 @@ public abstract class MovieShareDatabase extends RoomDatabase {
 
         }
 
+
+    private static class PopulateGenreAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private GenreDao genreDao;
+
+        private PopulateGenreAsyncTask(MovieShareDatabase db) {
+            genreDao = db.genreDao();
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            genreDao.deleteAllGenres();
+            Log.d("MovieShareDatabase", "doInBackground: " + "genre");
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://api.themoviedb.org/3/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            MovieShareApi service = retrofit.create(MovieShareApi.class);
+            String apiKey = "b524ecf04a4dde849cafa595bf86982b";
+
+            Call<GenreResponse> call = service.getAllGenres(apiKey);
+
+
+            try {
+                Response<GenreResponse> response = call.execute();
+                if (response.isSuccessful()) {
+                    GenreResponse result = response.body();
+                    List<Genre> genres = result.getGenres();
+                    for (Genre genre : genres) {
+                        Log.d("MovieShareDatabase", "doInBackground: " + genre.getName());
+                        genreDao.insert(genre);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+
+
+
+    }
 
     private static class PopulateListAsyncTask extends AsyncTask<Void, Void, Void> {
 
@@ -174,28 +224,6 @@ public abstract class MovieShareDatabase extends RoomDatabase {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-//                        call2.execute(new retrofit2.Callback<MovieResponse>() {
-//                            @Override
-//                            public void onResponse(Call<MovieResponse> call2, Response<MovieResponse> response) {
-//                                if (response.isSuccessful()) {
-//                                    MovieResponse result = response.body();
-//                                    List<Movie> movies = result.getListItems();
-//                                    for (Movie movie : movies) {
-//                                        Log.d("ListRepository", "doInBackground: getting list items " + movie.getTitle());
-//                                        ListItem listItem = new ListItem(listId, movie.getId());
-//                                        listItemDao.insert(listItem);
-//                                    }
-//                                } else {
-//                                    Log.d("userid", "error:" + response.code());
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<MovieResponse> call2, Throwable t) {
-//                                Log.d("userid", "error:" + t.getMessage());
-//                            }
-//                        });
                         listDao.insert(list);
                     }
                 } else {
@@ -210,7 +238,9 @@ public abstract class MovieShareDatabase extends RoomDatabase {
 
 
 
+
     }
+
 
 
 
