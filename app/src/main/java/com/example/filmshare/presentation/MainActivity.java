@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private GenreViewModel genreViewModel;
     private SearchView searchView;
     private boolean isToastDisplayed = false;
+    private int selectedGenreid = -1;
 
     BottomNavigationView bottomNavigationView;
 
@@ -107,38 +108,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        //Drop down lists
-        genreViewModel = new ViewModelProvider(this).get(GenreViewModel.class);
-
-        genreViewModel.getAllGenres().observe(this, genres -> {
-                    List<String> genreNames = new ArrayList<>();
-                    if (genres != null) {
-                        for (Genre genre : genres) {
-                            genreNames.add(genre.getName());
-                        }
-                    }
-
-            autoCompleteTextViewGenre = findViewById(R.id.textview_genre);
-            arrayAdapterGenre = new ArrayAdapter<String>(this, R.layout.spinner_list_item, genreNames);
-            autoCompleteTextViewGenre.setAdapter(arrayAdapterGenre);
-
-            int GenreId = getIntent().getIntExtra("GenreId", 0);
-        });
-
-        autoCompleteTextViewSorteren = findViewById(R.id.textview_sort);
-        arrayAdapterSorteren = new ArrayAdapter<String>(this, R.layout.spinner_list_item, getResources().getStringArray(R.array.Sort));
-
-        autoCompleteTextViewSorteren.setAdapter(arrayAdapterSorteren);
-
-        autoCompleteTextViewSorteren.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String text = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
-            }
-        });
-        //Drop down lists
-
         Log.d("MovieShareDatabase", "onOpen: ");
 
         ViewModelProvider viewModelProvider = new ViewModelProvider(this);
@@ -160,8 +129,46 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         };
 
+        //Drop down lists
+        genreViewModel = new ViewModelProvider(this).get(GenreViewModel.class);
 
-        movieViewModel.getMoviesByGenre(28).observe(this, moviesObserver);
+        genreViewModel.getAllGenres().observe(this, genres -> {
+            List<String> genreNames = new ArrayList<>();
+            if (genres != null) {
+                for (Genre genre : genres) {
+                    genreNames.add(genre.getName());
+                }
+            }
+
+            autoCompleteTextViewGenre = findViewById(R.id.textview_genre);
+            arrayAdapterGenre = new ArrayAdapter<String>(this, R.layout.spinner_list_item, genreNames);
+            autoCompleteTextViewGenre.setAdapter(arrayAdapterGenre);
+
+            autoCompleteTextViewGenre.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String text = adapterView.getItemAtPosition(i).toString();
+                    selectedGenreid = genres.get(i).getId();
+                    int genreId = getIntent().getIntExtra("genreId", 0);
+                    movieViewModel.getMoviesByGenre(genreId).observe(MainActivity.this, moviesObserver);
+                }
+            });
+        });
+
+        autoCompleteTextViewSorteren = findViewById(R.id.textview_sort);
+        arrayAdapterSorteren = new ArrayAdapter<String>(this, R.layout.spinner_list_item, getResources().getStringArray(R.array.Sort));
+
+        autoCompleteTextViewSorteren.setAdapter(arrayAdapterSorteren);
+
+        autoCompleteTextViewSorteren.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String text = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Drop down lists
+
 //        movieViewModel.getAllMovies().observe(this, moviesObserver);
         searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
