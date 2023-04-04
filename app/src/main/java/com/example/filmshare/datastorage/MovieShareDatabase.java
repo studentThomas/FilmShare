@@ -98,7 +98,6 @@ public abstract class MovieShareDatabase extends RoomDatabase {
                     MovieResponse result = response.body();
                     List<Movie> movies = result.getMovies();
                     for (Movie movie : movies) {
-                        Log.d("MovieShareDatabase", "doInBackground: " + movie.toString());
                         Call<Movie> detailsCall = movieShareApi.getMovieDetails(movie.getId(), key);
                         Response<Movie> detailsResponse = detailsCall.execute();
                         Movie details = detailsResponse.body();

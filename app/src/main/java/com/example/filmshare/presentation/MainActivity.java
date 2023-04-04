@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -84,23 +86,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         searchView = findViewById(R.id.search);
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (!isToastDisplayed) {
-                    Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
 
-                    isToastDisplayed = true;
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                isToastDisplayed = false;
-                return false;
-            }
-        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -171,34 +157,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         };
 
-//        Observer<List<ListItem>> listitemObserver = new Observer<List<ListItem>>() {
-//            @Override
-//            public void onChanged(@Nullable List<ListItem> listItems) {
-//                List<Movie> movies = new ArrayList<>();
-//
-//                for(ListItem listItem : listItems) {
-//                    int movieId = listItem.getMovieId();
-//                    movieViewModel.getMovieById(movieId).observe(MainActivity.this, new Observer<Movie>() {
-//                        @Override
-//                        public void onChanged(@Nullable Movie movie) {
-//                            if(movie != null) {
-//                                Log.d("MainActivity", "movie: " + movie.getTitle());
-//                                movies.add(movie);
-//                                adapterMovie.setMovies(movies);
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//        };
-//
-//        listItemViewModel = new ListItemViewModel(getApplication());
-//        listItemViewModel.getListItems(8245681).observe(this, listitemObserver);
-
-
 
 
         movieViewModel.getAllMovies().observe(this, moviesObserver);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                adapterMovie.setMovies(movieViewModel.searchMovies(query));
+                moviesObserver.onChanged(movieViewModel.searchMovies(query));
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                adapterMovie.setMovies(movieViewModel.searchMovies(newText));
+                return false;
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
+                return false;
+            }
+        });
 
     }
 
