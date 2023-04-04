@@ -37,6 +37,7 @@ import com.example.filmshare.domain.Genre;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.logic.AuthViewModel;
+import com.example.filmshare.logic.GenreViewModel;
 import com.example.filmshare.logic.ListItemViewModel;
 import com.example.filmshare.logic.MovieViewModel;
 import com.example.filmshare.logic.SessionManager;
@@ -51,7 +52,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private MovieViewModel movieViewModel;
-    private ListItemViewModel listItemViewModel;
+    private GenreViewModel genreViewModel;
     private SearchView searchView;
     private boolean isToastDisplayed = false;
 
@@ -107,23 +108,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
         //Drop down lists
-        autoCompleteTextViewGenre = findViewById(R.id.textview_genre);
-        arrayAdapterGenre = new ArrayAdapter<String>(this, R.layout.spinner_list_item, getResources().getStringArray(R.array.Genre));
+        genreViewModel = new ViewModelProvider(this).get(GenreViewModel.class);
 
-        autoCompleteTextViewGenre.setAdapter(arrayAdapterGenre);
+        genreViewModel.getAllGenres().observe(this, genres -> {
+                    List<String> genreNames = new ArrayList<>();
+                    if (genres != null) {
+                        for (Genre genre : genres) {
+                            genreNames.add(genre.getName());
+                        }
+                    }
+
+            autoCompleteTextViewGenre = findViewById(R.id.textview_genre);
+            arrayAdapterGenre = new ArrayAdapter<String>(this, R.layout.spinner_list_item, genreNames);
+            autoCompleteTextViewGenre.setAdapter(arrayAdapterGenre);
+
+            int GenreId = getIntent().getIntExtra("GenreId", 0);
+        });
 
         autoCompleteTextViewSorteren = findViewById(R.id.textview_sort);
         arrayAdapterSorteren = new ArrayAdapter<String>(this, R.layout.spinner_list_item, getResources().getStringArray(R.array.Sort));
 
         autoCompleteTextViewSorteren.setAdapter(arrayAdapterSorteren);
-        autoCompleteTextViewGenre.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String text = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
-            }
-        });
-
 
         autoCompleteTextViewSorteren.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -189,8 +194,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
                     movieViewModel.getAllMovies().observe(MainActivity.this, movies -> adapterMovie.setMovies(movies));
                 }
                 return false;
