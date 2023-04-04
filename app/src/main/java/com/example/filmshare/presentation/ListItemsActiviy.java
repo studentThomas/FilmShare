@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.filmshare.R;
 import com.example.filmshare.datastorage.MovieShareApi;
@@ -66,6 +68,7 @@ public class ListItemsActiviy extends AppCompatActivity {
         recyclerMovies.setHasFixedSize(true);
 
 
+
         String key = "b524ecf04a4dde849cafa595bf86982b";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")
@@ -78,6 +81,16 @@ public class ListItemsActiviy extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<ListItem> listItems) {
                 List<Movie> movies = new ArrayList<>();
+                if(listItems.isEmpty()) {
+                    Log.d("ListItemsActivity", "onCreate: listItems is empty");
+                    findViewById(R.id.textinput_genre).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.textinput_sort).setVisibility(View.INVISIBLE);
+                    Toast.makeText(ListItemsActiviy.this, "List is empty", Toast.LENGTH_LONG).show();
+
+                    return;
+                } else {
+                    Log.d("ListItemsActivity", "onCreate: listItems is not empty");
+                }
                 for (ListItem listItem : listItems) {
                     int movieId = listItem.getMovieId();
                     // Fetch the movie using the API
@@ -99,9 +112,17 @@ public class ListItemsActiviy extends AppCompatActivity {
                             // Handle error
                         }
                     });
+
                 }
+//                if (movies == null || movies.isEmpty()) {
+//                    Toast.makeText(ListItemsActiviy.this, "No movies in this list", Toast.LENGTH_SHORT).show();
+//                }
+
             }
+
         };
+
+
 
 
         listItemViewModel = new ListItemViewModel(getApplication());
