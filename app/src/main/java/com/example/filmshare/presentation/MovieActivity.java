@@ -120,7 +120,6 @@ public class MovieActivity extends AppCompatActivity {
             //Drop down lists
         });
 
-        addMovieButton = findViewById(R.id.add_movie);
         listItemViewModel = new ListItemViewModel(getApplication());
 
         TextView title = findViewById(R.id.movie_title);
