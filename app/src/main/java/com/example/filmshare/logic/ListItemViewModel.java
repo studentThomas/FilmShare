@@ -39,10 +39,13 @@ public class ListItemViewModel extends AndroidViewModel {
         listItemRepository.insert(listItem);
     }
 
+    public void delete(int movieId, int listId) {
+        listItemRepository.delete(movieId, listId);
+        Log.d("ListItemViewModel", "delete: " + movieId + " " + listId);
+    }
+
     public LiveData<java.util.List<ListItem>> getListItems(int listId) {
         return  listItemRepository.getListItems(listId);
-
-
 
     }
 

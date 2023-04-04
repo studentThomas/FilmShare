@@ -16,8 +16,12 @@ public interface ListItemDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(ListItem listItem);
 
-    @Delete
-    void delete(ListItem listItem);
+
+
+    @Query("DELETE FROM list_item WHERE movieId = :id")
+    void delete(int id);
+
+
 
     @Query("DELETE FROM list_item")
     void deleteAllListItems();

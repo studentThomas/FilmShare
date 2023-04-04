@@ -2,6 +2,7 @@ package com.example.filmshare.datastorage;
 
 import android.app.Application;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -14,6 +15,7 @@ import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.MovieResponse;
+import com.example.filmshare.domain.response.RemoveMovieRequest;
 import com.example.filmshare.logic.SessionManager;
 import com.example.filmshare.presentation.MainActivity;
 import com.google.gson.Gson;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,53 +47,15 @@ public class ListItemRepository {
         new insertListItemAsyncTask(listItemDao).execute(listItem);
     }
 
+    public void delete(int movieId, int listId) {
+        new deleteListItemTask(listId).execute(movieId);
+    }
+
     public LiveData<List<ListItem>> getListItems(int listId) {
         return listItemDao.getListItems(listId);
 
 
-
-
-
-
-
-//        String key = "b524ecf04a4dde849cafa595bf86982b";
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://api.themoviedb.org/3/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        MovieShareApi service = retrofit.create(MovieShareApi.class);
-
-
-//        for (ListItem listItem : listItems.getValue()) {
-//            Call<MovieResponse> call = service.getMovieById(listItem.getMovieId(), key);
-//            call.enqueue(new Callback<MovieResponse>() {
-//                @Override
-//                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-//                    if (!response.isSuccessful()) {
-//                        Log.d("ListRepository", "onResponse: " + response.code());
-//                        MovieResponse result = response.body();
-//                        List<Movie> movies = result.getMovies();
-//                        listMovies.setValue(movies);
-//                        for (Movie movie : movies) {
-//                            Log.d("ListRepository", "onResponse: " + movie.getTitle());
-//                        }
-//                    }
-//
-//
-//                }
-//
-//                @Override
-//                public void onFailure(Call<MovieResponse> call, Throwable t) {
-//                    Log.d("ListRepository", "onFailure: " + t.getMessage());
-//                }
-//            });
-//        }
-
     }
-
-
 
     private static class insertListItemAsyncTask extends android.os.AsyncTask<ListItem, Void, Void> {
         private ListItemDao listItemDao;
@@ -147,6 +112,101 @@ public class ListItemRepository {
     }
 
 
+    private class deleteListItemTask extends AsyncTask<Integer, Void, Void> {
+
+        private int listId;
 
 
+        public deleteListItemTask(int listId) {
+            this.listId = listId;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... ids) {
+            Log.d("ListRepository", "doInBackground deleting listitem: " + ids[0]);
+            for (int id : ids) {
+//                listItemDao.delete(id);
+                ListItem listItem = new ListItem(listId, id);
+
+
+                Gson gson = new GsonBuilder()
+                        .setLenient()
+                        .create();
+
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://api.themoviedb.org/3/")
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+
+                String apiKey = "b524ecf04a4dde849cafa595bf86982b";
+                String sessionId = SessionManager.getInstance().getSessionId();
+                MovieShareApi service = retrofit.create(MovieShareApi.class);
+
+                ListItemRequest listItemRequest = new ListItemRequest(id);
+
+//                Call<ListItem> call = service.removeMovieFromList(listItem.getListId(), apiKey, sessionId, listItemRequest);
+                Call<ListItem> call = service.removeMovieFromList(listId, apiKey, sessionId, listItemRequest);
+
+                call.enqueue(new Callback<ListItem>() {
+                    @Override
+                    public void onResponse(Call<ListItem> call, Response<ListItem> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("ListRepository", "Success inserting listitem: " + response.body().toString());
+                        } else {
+                            Log.d("ListRepository", "Error inserting listitem: " + response.message());
+                            Log.d("ListRepository", "Error inserting listitem: " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ListItem> call, Throwable t) {
+                        Log.d("ListRepository", "Error inserting list: " + t.getMessage());
+                    }
+
+                });
+
+
+            }
+//            Gson gson = new GsonBuilder()
+//                    .setLenient()
+//                    .create();
+//
+//            Retrofit retrofit = new Retrofit.Builder()
+//                    .baseUrl("https://api.themoviedb.org/3/")
+//                    .addConverterFactory(GsonConverterFactory.create(gson))
+//                    .build();
+//
+//            String apiKey = "b524ecf04a4dde849cafa595bf86982b";
+//            String sessionId = SessionManager.getInstance().getSessionId();
+//            MovieShareApi service = retrofit.create(MovieShareApi.class);
+//
+//            ListItemRequest listItemRequest = new ListItemRequest(32516);
+//
+//            Call<ListItem> call = service.removeMovieFromList(8245681, apiKey, sessionId, listItemRequest);
+//
+//            call.enqueue(new Callback<ListItem>() {
+//                @Override
+//                public void onResponse(Call<ListItem> call, Response<ListItem> response) {
+//                    if (response.isSuccessful()) {
+//                        Log.d("ListRepository", "Success inserting listitem: " + response.body().toString());
+//                    } else {
+//                        Log.d("ListRepository", "Error inserting listitem: " + response.message());
+//                        Log.d("ListRepository", "Error inserting listitem: " + response.code());
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ListItem> call, Throwable t) {
+//                    Log.d("ListRepository", "Error inserting list: " + t.getMessage());
+//                }
+//
+//            });
+            return null;
+        }
+    }
 }
+
+
+
+
+

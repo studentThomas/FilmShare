@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,6 +63,7 @@ public class ListItemsActiviy extends AppCompatActivity {
         setContentView(R.layout.activity_list_items_activiy);
 
 
+
 //        ListItemViewModel listItemViewModel = new ListItemViewModel(getApplication());
 //
 //        listItemViewModel.insertAllListItems(8245681);
@@ -103,6 +105,7 @@ public class ListItemsActiviy extends AppCompatActivity {
                 }
                 for (ListItem listItem : listItems) {
                     int movieId = listItem.getMovieId();
+                    listId = listItem.getListId();
                     // Fetch the movie using the API
                     Call<Movie> detailsCall = movieShareApi.getMovieDetails(movieId, key);
                     detailsCall.enqueue(new Callback<Movie>() {
@@ -124,13 +127,29 @@ public class ListItemsActiviy extends AppCompatActivity {
                     });
 
                 }
-//                if (movies == null || movies.isEmpty()) {
-//                    Toast.makeText(ListItemsActiviy.this, "No movies in this list", Toast.LENGTH_SHORT).show();
-//                }
 
             }
 
         };
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT |  ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                Movie listItem = adapterMovie.getItem(position);
+                int movieId = listItem.getId();
+                listItemViewModel.delete(movieId, listId);
+                Log.d("ListItemsActivity", "onSwiped: " + movieId + " " + listId);
+                adapterMovie.removeItem(position);
+            }
+        });
+
+        helper.attachToRecyclerView(recyclerMovies);
 
 
 
@@ -143,6 +162,8 @@ public class ListItemsActiviy extends AppCompatActivity {
 
 
     }
+
+
 
 
     @Override

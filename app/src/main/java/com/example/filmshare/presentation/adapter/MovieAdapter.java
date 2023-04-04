@@ -58,6 +58,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         notifyDataSetChanged();
     }
 
+    public void removeItem(int position) {
+        this.movies.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public Movie getItem(int position) {
+        return movies.get(position);
+    }
+
+
 
 
 

@@ -60,8 +60,9 @@ public abstract class MovieShareDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             new PopulateMovieAsyncTask(instance).execute();
-            new PopulateListAsyncTask(instance).execute();
             new PopulateGenreAsyncTask(instance).execute();
+            new PopulateListAsyncTask(instance).execute();
+
         }
     };
 
