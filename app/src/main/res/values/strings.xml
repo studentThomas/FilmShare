@@ -5,6 +5,7 @@
     <string name="genre">Genre</string>
     <string name="sort">Sort</string>
     <string name="movie_description">Movie description</string>
+    <string name="movie_tagline">Movie taline</string>
 
     //Spinner
     <string-array name="Genre">

@@ -38,7 +38,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int position) {
         Movie currentMovie = movies.get(position);
         movieViewHolder.title.setText(currentMovie.getTitle());
-        movieViewHolder.overview.setText(currentMovie.getOverview());
+        movieViewHolder.tagline.setText(currentMovie.getTagline());
 
 
         String imageUrl = "https://image.tmdb.org/t/p/w500" + currentMovie.getBackdropPath();
@@ -63,7 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
-        private TextView overview;
+        private TextView tagline;
         private ImageView backdrop;
 
 
@@ -72,7 +72,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.movie_title);
-            overview = itemView.findViewById(R.id.movie_overview);
+            tagline = itemView.findViewById(R.id.movie_tagline);
             backdrop = itemView.findViewById(R.id.movie_image);
 
 

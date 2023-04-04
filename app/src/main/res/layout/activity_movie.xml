@@ -81,11 +81,11 @@
             <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_list"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="130dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
-        android:hint="@string/lists"
+        android:hint="Add movie to a list"
         android:popupElevation="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/movie_budget"
         app:layout_constraintEnd_toEndOf="@+id/movie_language"

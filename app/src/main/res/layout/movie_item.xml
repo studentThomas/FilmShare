@@ -38,11 +38,11 @@
         <View style="@style/seperator" />
 
         <TextView
-            android:id="@+id/movie_overview"
+            android:id="@+id/movie_tagline"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="4dp"
-            android:text="@string/movie_overview"
+            android:text="@string/movie_tagline"
             android:textColor="@color/black"
             android:textSize="15sp"
             />

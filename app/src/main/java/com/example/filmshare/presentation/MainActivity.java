@@ -21,7 +21,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -84,10 +83,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //Bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-        searchView = findViewById(R.id.search);
-
-
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -98,11 +93,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         return true;
                     case R.id.action_lists:
                         startActivity(new Intent(getApplicationContext(), ListActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.action_settings:
                         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                 }
 
@@ -159,44 +154,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         };
 
 
-
         movieViewModel.getAllMovies().observe(this, moviesObserver);
+        searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                adapterMovie.setMovies(movieViewModel.searchMovies(query));
-                moviesObserver.onChanged(movieViewModel.searchMovies(query));
+                if (query.length() > 0) {
+                    movieViewModel.searchMovies(query, new MovieViewModel.SearchMoviesCallback() {
+                        @Override
+                        public void onMoviesFound(List<Movie> movies) {
+                            adapterMovie.setMovies(movies);
+                        }
+
+                        @Override
+                        public void onError(Throwable t) {
+                            // Handle error
+                        }
+                    });
+                } else {
+                    movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
+                }
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-//                adapterMovie.setMovies(movieViewModel.searchMovies(newText));
-                return false;
-            }
-        });
-
-        searchView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
-                    moviesObserver.onChanged(movieViewModel.searchMovies(searchView.getQuery().toString()));
-                    return true;
+                if (newText.isEmpty()) {
+                    movieViewModel.getAllMovies().observe(MainActivity.this, movies -> adapterMovie.setMovies(movies));
                 }
                 return false;
             }
         });
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
-                return false;
-            }
-        });
-
     }
 
-    @Override
+        @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
         Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();

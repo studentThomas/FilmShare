@@ -31,6 +31,10 @@ public class MovieViewModel extends AndroidViewModel {
         movieRepository = new MovieRepository(application);
     }
 
+    public interface SearchMoviesCallback {
+        void onMoviesFound(List<Movie> movies);
+        void onError(Throwable t);
+    }
 
 
     public LiveData<List<Movie>> getAllMovies() {
@@ -45,7 +49,7 @@ public class MovieViewModel extends AndroidViewModel {
         return movieRepository.getMovieById(id);
     }
 
-    public List<Movie> searchMovies(String query) {
+    public List<Movie> searchMovies(String query, SearchMoviesCallback callback) {
         List<Movie> movies = new ArrayList<>();
 
         Log.d("Movie", "searchMovies: " + query);
@@ -63,15 +67,18 @@ public class MovieViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
-                    movies.addAll(response.body().getMovies());
-                    Log.d("Movie", movies.get(0).getTitle());
-                }
+                    List<Movie> movies = response.body().getMovies();
+                    callback.onMoviesFound(movies);
+                } else {
+                callback.onError(new Exception("Error: " + response.code()));
+            }
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
                 // Handle network failure
                 Log.d("Movie", "onFailure: " + t.getMessage());
+                callback.onError(t);
             }
         });
 
