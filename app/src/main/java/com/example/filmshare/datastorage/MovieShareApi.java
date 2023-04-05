@@ -17,6 +17,7 @@ import com.example.filmshare.domain.response.GenreResponse;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.ListResponse;
 
+import com.example.filmshare.domain.response.ReviewResponse;
 import com.example.filmshare.domain.response.SessionRequest;
 import com.example.filmshare.domain.response.SessionResponse;
 import com.example.filmshare.domain.response.TokenResponse;
@@ -69,5 +70,11 @@ public interface MovieShareApi {
 
     @GET("list/{list_id}")
     Call<MovieResponse> getListItems(@Path("list_id") int listId, @Query("api_key") String apiKey);
+
+    @GET("movie/{movie_id}/reviews")
+    Call<ReviewResponse> getMovieReviews(
+            @Path("movie_id") int movieId,
+            @Query("api_key") String apiKey
+    );
 
 }

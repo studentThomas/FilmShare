@@ -39,6 +39,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movie_poster" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Overview:"
+                android:textColor="#000000"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movie_title" />
 
             <TextView
                 android:id="@+id/movie_overview"
@@ -51,11 +60,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movie_title" />
 
+            <View style="@style/seperator" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/movie_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/back"
                 android:padding="16dp"
                 android:text="Movie language"
                 android:textColor="#000000"
@@ -70,6 +86,7 @@
                 android:layout_width="323dp"
                 android:layout_height="56dp"
                 android:padding="16dp"
+                android:background="@drawable/back"
                 android:text="Movie runtime"
                 android:textColor="#000000"
                 android:textSize="16sp"
@@ -77,6 +94,59 @@
                 app:layout_constraintHorizontal_bias="0.609"
                 app:layout_constraintStart_toEndOf="parent"
                 tools:layout_editor_absoluteY="350dp" />
+
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/movie_releaseDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back"
+                android:text="Movie releaseDate"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/movie_budget"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <TextView
+                android:id="@+id/movie_popularity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Movie popularity"
+                android:background="@drawable/back"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/movie_budget"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </LinearLayout>
+
+            <TextView
+                android:id="@+id/movie_voteAverage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Movie voteAverage"
+                android:background="@drawable/back"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/movie_popularity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <View style="@style/seperator" />
 
             <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_list"
@@ -101,44 +171,30 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/movie_releaseDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movie releaseDate"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_budget"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <View style="@style/seperator" />
 
+            <TextView
+                android:id="@+id/movie_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/reviews"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/movie_popularity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movie popularity"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_budget"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-    <TextView
-        android:id="@+id/movie_voteAverage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Movie voteAverage"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_popularity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                android:layout_marginBottom="55dp"
+                android:paddingTop="20dp"
+                tools:listitem="@layout/review_item" />
 
         </LinearLayout>
     </ScrollView>

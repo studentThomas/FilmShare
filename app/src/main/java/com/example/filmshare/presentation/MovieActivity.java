@@ -3,6 +3,8 @@ package com.example.filmshare.presentation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -50,7 +52,11 @@ import com.example.filmshare.logic.ListViewModel;
 import com.example.filmshare.presentation.adapter.ListAdapter;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.logic.ListItemViewModel;
+import com.example.filmshare.presentation.adapter.MovieAdapter;
+import com.example.filmshare.presentation.adapter.ReviewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -132,6 +138,12 @@ public class MovieActivity extends AppCompatActivity {
         TextView popularity = findViewById(R.id.movie_popularity);
         TextView voteAverage = findViewById(R.id.movie_voteAverage);
 
+        RecyclerView recyclerReviews = findViewById(R.id.recycler_view_reviews);
+        LinearLayoutManager layout_reviews = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerReviews.setLayoutManager(layout_reviews);
+        final ReviewAdapter adapterReview = new ReviewAdapter();
+        recyclerReviews.setAdapter(adapterReview);
+        recyclerReviews.setHasFixedSize(true);
 
         title.setText(getIntent().getStringExtra("title"));
         overview.setText(getIntent().getStringExtra("overview"));
