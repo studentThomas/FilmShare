@@ -1,7 +1,9 @@
 package com.example.filmshare.presentation;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +43,7 @@ import com.bumptech.glide.Glide;
 import com.example.filmshare.R;
 
 import com.example.filmshare.datastorage.ListRepository;
+import com.example.filmshare.domain.Genre;
 import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.Review;
 import com.example.filmshare.logic.ListViewModel;
@@ -97,6 +100,28 @@ public class MovieActivity extends AppCompatActivity {
 
         listViewModel = new ViewModelProvider(this).get(ListViewModel.class);
 
+
+        RecyclerView recyclerReviews = findViewById(R.id.recycler_view_review);
+        LinearLayoutManager layout_reviews = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerReviews.setLayoutManager(layout_reviews);
+        final ReviewAdapter adapterReview = new ReviewAdapter();
+        recyclerReviews.setAdapter(adapterReview);
+        recyclerReviews.setHasFixedSize(true);
+
+        reviewViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
+        Observer<List<Review>> reviewsObserver = new Observer<List<Review>>() {
+            @Override
+            public void onChanged(@Nullable List<Review> reviews) {
+                adapterReview.setReviews(reviews);
+            }
+        };
+        int movieId = getIntent().getIntExtra("id", 0);
+        reviewViewModel.getReviews(movieId).observe(this, reviewsObserver);
+        //moet rating zijn van sterren geen 7.5
+        reviewViewModel.rateMovie(movieId, 7.5);
+
+
+
         ListRepository listRepository = new ListRepository(getApplication());
 
         listViewModel.getAllLists().observe(this, viewModelLists -> {
@@ -141,12 +166,7 @@ public class MovieActivity extends AppCompatActivity {
         TextView popularity = findViewById(R.id.movie_popularity);
         TextView voteAverage = findViewById(R.id.movie_voteAverage);
 
-        RecyclerView recyclerReviews = findViewById(R.id.recycler_view_review);
-        LinearLayoutManager layout_reviews = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerReviews.setLayoutManager(layout_reviews);
-        final ReviewAdapter adapterReview = new ReviewAdapter();
-        recyclerReviews.setAdapter(adapterReview);
-        recyclerReviews.setHasFixedSize(true);
+
 
         title.setText(getIntent().getStringExtra("title"));
         overview.setText(getIntent().getStringExtra("overview"));

@@ -235,8 +235,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
         movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
-        reviewViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
-        reviewViewModel.getReviews(76600);
+//        reviewViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
+//        reviewViewModel.getReviews(76600);
 
     }
 
