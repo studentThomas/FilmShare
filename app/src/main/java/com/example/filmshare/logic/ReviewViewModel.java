@@ -8,24 +8,18 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-<<<<<<< HEAD
 import com.example.filmshare.datastorage.MovieRepository;
 import com.example.filmshare.datastorage.MovieShareApi;
 import com.example.filmshare.domain.ListItem;
-=======
 import com.example.filmshare.datastorage.MovieShareApi;
 import com.example.filmshare.domain.AuthorDetails;
 import com.example.filmshare.domain.Movie;
->>>>>>> e48a979cf325b1585224fc91c419f30fb04e7381
 import com.example.filmshare.domain.Review;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.ReviewResponse;
-<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-=======
 import com.google.gson.annotations.SerializedName;
->>>>>>> e48a979cf325b1585224fc91c419f30fb04e7381
 
 import java.util.List;
 
