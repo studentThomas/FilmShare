@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return true;
             }
 
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
@@ -206,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return false;
             }
         });
+//        movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
     }
 
         @Override

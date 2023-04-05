@@ -15,7 +15,6 @@ import com.example.filmshare.domain.Movie;
 import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.MovieResponse;
-import com.example.filmshare.domain.response.RemoveMovieRequest;
 import com.example.filmshare.logic.SessionManager;
 import com.example.filmshare.presentation.MainActivity;
 import com.google.gson.Gson;
@@ -125,7 +124,7 @@ public class ListItemRepository {
         protected Void doInBackground(Integer... ids) {
             Log.d("ListRepository", "doInBackground deleting listitem: " + ids[0]);
             for (int id : ids) {
-//                listItemDao.delete(id);
+                listItemDao.delete(id);
                 ListItem listItem = new ListItem(listId, id);
 
 

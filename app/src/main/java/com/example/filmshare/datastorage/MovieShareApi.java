@@ -16,7 +16,7 @@ import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.GenreResponse;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.ListResponse;
-import com.example.filmshare.domain.response.RemoveMovieRequest;
+
 import com.example.filmshare.domain.response.SessionRequest;
 import com.example.filmshare.domain.response.SessionResponse;
 import com.example.filmshare.domain.response.TokenResponse;
