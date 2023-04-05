@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,12 +30,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReviewAdapter.ReviewViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Review currentReview = reviews.get(position);
         holder.author.setText(currentReview.getAuthor());
         holder.content.setText(currentReview.getContent());
         AuthorDetails authorDetails = currentReview.getAuthorDetails();
-        holder.rating.setText(String.valueOf(authorDetails.getRating()));
     }
 
     @Override
@@ -54,13 +54,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
         private TextView author;
         private TextView content;
-        private TextView rating;
+        private RatingBar rating;
 
         public ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
             author = itemView.findViewById(R.id.review_author);
             content = itemView.findViewById(R.id.review_content);
-            rating = itemView.findViewById(R.id.review_rating);
+            rating = itemView.findViewById(R.id.movie_ratingBar);
 
         }
 

@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +67,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,10 +120,7 @@ public class MovieActivity extends AppCompatActivity {
         };
         int movieId = getIntent().getIntExtra("id", 0);
         reviewViewModel.getReviews(movieId).observe(this, reviewsObserver);
-        //moet rating zijn van sterren geen 7.5
         reviewViewModel.rateMovie(movieId, 7.5);
-
-
 
         ListRepository listRepository = new ListRepository(getApplication());
 
@@ -166,21 +166,27 @@ public class MovieActivity extends AppCompatActivity {
         TextView popularity = findViewById(R.id.movie_popularity);
         TextView voteAverage = findViewById(R.id.movie_voteAverage);
 
-
+        double voteAverageValue = getIntent().getDoubleExtra("voteAverage", 0);
+        String voteAverageString = String.format("%.1f", voteAverageValue);
 
         title.setText(getIntent().getStringExtra("title"));
         overview.setText(getIntent().getStringExtra("overview"));
-        language.setText("Language: " + getIntent().getStringExtra("language"));
+        String languageText = "<b>Language:</b> " + getIntent().getStringExtra("language");
+        language.setText(Html.fromHtml(languageText));
 
         String imageUrl = "https://image.tmdb.org/t/p/w500" + getIntent().getStringExtra("backdrop");
         Glide.with(backdrop.getContext())
                 .load(imageUrl)
                 .into(backdrop);
 
-        runtime.setText("Runtime: " + "-" + getIntent().getIntExtra("runtime", 0));
-        releaseDate.setText("Release date: " + getIntent().getStringExtra("releaseDate"));
-        popularity.setText("Popularity: " + getIntent().getDoubleExtra("popularity", 0));
-        voteAverage.setText("Vote average: " + getIntent().getDoubleExtra("voteAverage", 0));
+        String runtimeText = "<b>Runtime:</b> " + getIntent().getIntExtra("runtime", 0) + " minutes";
+        runtime.setText(Html.fromHtml(runtimeText));
+        String releaseDateText = "<b>Release date:</b> " + getIntent().getStringExtra("releaseDate");
+        releaseDate.setText(Html.fromHtml(releaseDateText));
+        String popularityText = "<b>Popularity:</b> " + getIntent().getDoubleExtra("popularity", 0);
+        popularity.setText(Html.fromHtml(popularityText));
+        String voteAverageText = "<b>Vote average:</b> " + voteAverageString;
+        voteAverage.setText(Html.fromHtml(voteAverageText));
 
     }
 
