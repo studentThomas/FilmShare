@@ -40,6 +40,7 @@ import com.example.filmshare.logic.AuthViewModel;
 import com.example.filmshare.logic.GenreViewModel;
 import com.example.filmshare.logic.ListItemViewModel;
 import com.example.filmshare.logic.MovieViewModel;
+import com.example.filmshare.logic.ReviewViewModel;
 import com.example.filmshare.logic.SessionManager;
 import com.example.filmshare.presentation.adapter.MovieAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private MovieViewModel movieViewModel;
     private GenreViewModel genreViewModel;
+    private ReviewViewModel reviewViewModel;
     private SearchView searchView;
     private boolean isToastDisplayed = false;
     private int selectedGenreid = -1;
@@ -73,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             window.setStatusBarColor(getResources().getColor(R.color.color_accent));
         }
         setContentView(R.layout.activity_main);
+
+
 
 //        ListItemViewModel listItemViewModel = new ListItemViewModel(getApplication());
 //
@@ -231,6 +235,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
         movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
+        reviewViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
+        reviewViewModel.getReviews(76600);
+
     }
 
         @Override
