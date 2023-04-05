@@ -124,5 +124,40 @@ public class MovieViewModel extends AndroidViewModel {
         return moviesLiveData;
     }
 
+    public LiveData<List<Movie>> sortMovies(String sort) {
+        MutableLiveData<List<Movie>> moviesLiveData = new MutableLiveData<>();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MovieShareApi service = retrofit.create(MovieShareApi.class);
+        String key = "b524ecf04a4dde849cafa595bf86982b";
+
+        Call<MovieResponse> call = service.sortMovies(key, sort);
+        call.enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Movie> moviesGenre = response.body().getMovies();
+                    for (Movie movie : moviesGenre) {
+                        Log.d("Movie", "onResponse: " + movie.getTitle());
+                    }
+                    moviesLiveData.setValue(moviesGenre);
+                } else {
+                    Log.d("Movie", "onResponse: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+                Log.d("Movie", "onFailure: " + t.getMessage());
+            }
+        });
+
+        return moviesLiveData;
+    }
+
 
 }

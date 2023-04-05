@@ -30,13 +30,11 @@ public interface MovieShareApi {
     @GET("discover/movie")
     Call<MovieResponse> getMoviesByGenre(@Query("api_key") String apiKey, @Query("with_genres") int genreId);
 
+    @GET("discover/movie")
+    Call<MovieResponse> sortMovies(@Query("api_key") String apiKey, @Query("sort_by") String sortBy);
+
     @GET("genre/movie/list")
     Call<GenreResponse> getAllGenres(@Query("api_key") String apiKey);
-
-//    @DELETE("list/{list_id}/remove_item")
-//    Call<ResponseBody> removeMovieFromList(@Path("list_id") int listId, @Query("media_id") int movieId, @Query("api_key") String apiKey);
-
-
 
 
     @GET("movie/{id}")

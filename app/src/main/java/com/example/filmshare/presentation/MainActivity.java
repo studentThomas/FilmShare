@@ -163,7 +163,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String text = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
+                String sortBy = "";
+
+                switch (text) {
+                    case "Most popular":
+                        sortBy = "popularity.desc";
+                        break;
+                    case "Least popular":
+                        sortBy = "popularity.asc";
+                        break;
+                    case "Highest Rating":
+                        sortBy = "vote_average.desc";
+                        break;
+                    case "Lowest Rating":
+                        sortBy = "vote_average.asc";
+                        break;
+                    case "Oldest":
+                        sortBy = "release_date.asc";
+                        break;
+                    case "Newest":
+                        sortBy = "release_date.desc";
+                        break;
+                }
+
+                movieViewModel.sortMovies(sortBy).observe(MainActivity.this, moviesObserver);
+
             }
         });
         //Drop down lists

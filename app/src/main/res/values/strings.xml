@@ -33,10 +33,11 @@
 
     <string-array name="Sort">
         <item>Most popular</item>
+        <item>Least popular</item>
         <item>Highest Rating</item>
         <item>Lowest Rating</item>
-        <item>Most watched</item>
-        <item>Least watched</item>
+        <item>Oldest Movies</item>
+        <item>Newest Movies</item>
     </string-array>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
