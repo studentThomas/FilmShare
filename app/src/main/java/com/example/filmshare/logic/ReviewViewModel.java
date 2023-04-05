@@ -5,15 +5,27 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+<<<<<<< HEAD
 import com.example.filmshare.datastorage.MovieRepository;
 import com.example.filmshare.datastorage.MovieShareApi;
 import com.example.filmshare.domain.ListItem;
+=======
+import com.example.filmshare.datastorage.MovieShareApi;
+import com.example.filmshare.domain.AuthorDetails;
+import com.example.filmshare.domain.Movie;
+>>>>>>> e48a979cf325b1585224fc91c419f30fb04e7381
 import com.example.filmshare.domain.Review;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.ReviewResponse;
+<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+=======
+import com.google.gson.annotations.SerializedName;
+>>>>>>> e48a979cf325b1585224fc91c419f30fb04e7381
 
 import java.util.List;
 
@@ -33,8 +45,49 @@ public class ReviewViewModel extends AndroidViewModel {
         reviewResponse = new ReviewResponse();
     }
 
-    public List<Review> getReviews() {
-        return reviewResponse.getReviews();
+    public LiveData<List<Review>> getReviews(int movieId) {
+        Log.d("Review", "getReviews: " + movieId);
+
+        MutableLiveData<List<Review>> reviews2 = new MutableLiveData<>();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MovieShareApi service = retrofit.create(MovieShareApi.class);
+        String key = "b524ecf04a4dde849cafa595bf86982b";
+
+        Call<ReviewResponse> call = service.getMovieReviews(movieId, key);
+        call.enqueue(new Callback<ReviewResponse>() {
+            @Override
+            public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Review> reviews = response.body().getReviews();
+                    Log.d("Review", "onResponse: getting autohrs " + reviews.size());
+
+                    for (Review review : reviews) {
+                        Log.d("Review", "onResponse: " + review.getAuthor() );
+                        AuthorDetails authorDetails = review.getAuthorDetails();
+                        Log.d("Review", "onResponse: " + authorDetails.getRating());
+                    }
+                    reviews2.setValue(reviews);
+                } else {
+                    Log.d("Review", "onResponse: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewResponse> call, Throwable t) {
+                Log.d("Review", "onFailure: " + t.getMessage());
+            }
+        });
+
+
+        return reviews2;
+
+
+
     }
 
     public void insert(Review review) {

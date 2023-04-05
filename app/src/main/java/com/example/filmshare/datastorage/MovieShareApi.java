@@ -74,9 +74,7 @@ public interface MovieShareApi {
     Call<MovieResponse> getListItems(@Path("list_id") int listId, @Query("api_key") String apiKey);
 
     @GET("movie/{movie_id}/reviews")
-    Call<ReviewResponse> getMovieReviews(
-            @Path("movie_id") int movieId,
-            @Query("api_key") String apiKey
+    Call<ReviewResponse> getMovieReviews(@Path("movie_id") int movieId, @Query("api_key") String apiKey
     );
 
 }

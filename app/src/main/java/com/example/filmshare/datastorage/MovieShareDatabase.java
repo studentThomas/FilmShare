@@ -150,7 +150,6 @@ public abstract class MovieShareDatabase extends RoomDatabase {
                     GenreResponse result = response.body();
                     List<Genre> genres = result.getGenres();
                     for (Genre genre : genres) {
-                        Log.d("MovieShareDatabase", "doInBackground: " + genre.getName());
                         genreDao.insert(genre);
                     }
                 }
