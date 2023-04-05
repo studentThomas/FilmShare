@@ -10,14 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmshare.R;
+import com.example.filmshare.domain.AuthorDetails;
 import com.example.filmshare.domain.Review;
 import com.example.filmshare.presentation.MovieActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder> {
 
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @NonNull
     @Override
@@ -31,6 +33,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         Review currentReview = reviews.get(position);
         holder.author.setText(currentReview.getAuthor());
         holder.content.setText(currentReview.getContent());
+        AuthorDetails authorDetails = currentReview.getAuthorDetails();
+        holder.rating.setText(String.valueOf(authorDetails.getRating()));
     }
 
     @Override
@@ -46,27 +50,20 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         notifyDataSetChanged();
     }
 
-    class ReviewViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ReviewViewHolder extends RecyclerView.ViewHolder{
 
         private TextView author;
         private TextView content;
+        private TextView rating;
 
         public ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
             author = itemView.findViewById(R.id.review_author);
             content = itemView.findViewById(R.id.review_content);
+            rating = itemView.findViewById(R.id.review_rating);
 
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            Review currentReview = reviews.get(getAdapterPosition());
-            Intent intent = new Intent(view.getContext(), MovieActivity.class);
-            intent.putExtra("author", currentReview.getAuthor());
-            intent.putExtra("content", currentReview.getContent());
 
-            view.getContext().startActivity(intent);
-        }
     }
 }

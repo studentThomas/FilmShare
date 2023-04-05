@@ -1,6 +1,7 @@
 package com.example.filmshare.logic;
 
 import android.app.Application;
+import android.media.Rating;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -8,27 +9,23 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-<<<<<<< HEAD
 import com.example.filmshare.datastorage.MovieRepository;
 import com.example.filmshare.datastorage.MovieShareApi;
 import com.example.filmshare.domain.ListItem;
-=======
 import com.example.filmshare.datastorage.MovieShareApi;
 import com.example.filmshare.domain.AuthorDetails;
 import com.example.filmshare.domain.Movie;
->>>>>>> e48a979cf325b1585224fc91c419f30fb04e7381
 import com.example.filmshare.domain.Review;
 import com.example.filmshare.domain.response.ListItemRequest;
 import com.example.filmshare.domain.response.ReviewResponse;
-<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-=======
 import com.google.gson.annotations.SerializedName;
->>>>>>> e48a979cf325b1585224fc91c419f30fb04e7381
 
+import java.io.IOException;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +40,45 @@ public class ReviewViewModel extends AndroidViewModel {
     public ReviewViewModel(@NonNull Application application) {
         super(application);
         reviewResponse = new ReviewResponse();
+    }
+
+    public void rateMovie(int movieId, double rating) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MovieShareApi service = retrofit.create(MovieShareApi.class);
+        String key = "b524ecf04a4dde849cafa595bf86982b";
+
+        String sessionId = SessionManager.getInstance().getSessionId();
+
+        com.example.filmshare.domain.Rating ratingBody = new com.example.filmshare.domain.Rating(rating);
+
+
+        Call<ReviewResponse> call = service.rateMovie(movieId, key, sessionId, ratingBody);
+
+
+        call.enqueue(new Callback<ReviewResponse>() {
+            @Override
+            public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Review", "onResponse: succes " + response.body());
+                } else {
+                    try {
+                        Log.d("Review", "Error response code: " + response.code() + " - " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewResponse> call, Throwable t) {
+                Log.d("Review", "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     public LiveData<List<Review>> getReviews(int movieId) {
