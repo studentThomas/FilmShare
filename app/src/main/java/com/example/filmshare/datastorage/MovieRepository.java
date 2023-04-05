@@ -25,8 +25,6 @@ public class MovieRepository {
 
     }
 
-
-
     public void deleteAllMovies()  {
         new deleteAllMoviesAsyncTask(movieDao).execute();
     }

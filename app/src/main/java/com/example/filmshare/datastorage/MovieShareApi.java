@@ -1,8 +1,6 @@
 package com.example.filmshare.datastorage;
 
-import okhttp3.ResponseBody;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.Call;
 import retrofit2.http.POST;
@@ -12,6 +10,7 @@ import retrofit2.http.Query;
 import com.example.filmshare.domain.List;
 import com.example.filmshare.domain.ListItem;
 import com.example.filmshare.domain.Movie;
+import com.example.filmshare.domain.Review;
 import com.example.filmshare.domain.User;
 import com.example.filmshare.domain.response.GenreResponse;
 import com.example.filmshare.domain.response.ListItemRequest;
@@ -61,6 +60,9 @@ public interface MovieShareApi {
 
     @POST("list/{list_id}/add_item")
     Call<ListItem> addListItem(@Path("list_id") int listId, @Query("api_key") String apiKey, @Query("session_id") String sessionId, @Body ListItemRequest requestBody);
+
+    @POST("review/{review_id}/add_review")
+    Call<Review> addReview(@Path("review_id") String reviewId, @Query("api_key") String apiKey, @Query("session_id") String sessionId, @Body Review requestBody);
 
     @POST("list/{list_id}/remove_item")
     Call<ListItem> removeMovieFromList(@Path("list_id") int listId, @Query("api_key") String apiKey, @Query("session_id") String sessionId, @Body ListItemRequest requestBody);

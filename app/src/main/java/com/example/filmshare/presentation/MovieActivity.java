@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,7 +42,9 @@ import com.example.filmshare.R;
 
 import com.example.filmshare.datastorage.ListRepository;
 import com.example.filmshare.domain.Movie;
+import com.example.filmshare.domain.Review;
 import com.example.filmshare.logic.ListViewModel;
+import com.example.filmshare.logic.ReviewViewModel;
 import com.example.filmshare.presentation.adapter.ListAdapter;
 
 import com.example.filmshare.domain.ListItem;
@@ -70,9 +73,9 @@ public class MovieActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     AutoCompleteTextView autoCompleteTextViewLists;
     ArrayAdapter<String> arrayAdapterLists;
-
-    private Button addMovieButton;
     private ListItemViewModel listItemViewModel;
+
+    private ReviewViewModel reviewViewModel;
 
     private ListViewModel listViewModel;
 
@@ -81,7 +84,7 @@ public class MovieActivity extends AppCompatActivity {
     private int selectedListId = -1;
 
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,7 +141,7 @@ public class MovieActivity extends AppCompatActivity {
         TextView popularity = findViewById(R.id.movie_popularity);
         TextView voteAverage = findViewById(R.id.movie_voteAverage);
 
-        RecyclerView recyclerReviews = findViewById(R.id.recycler_view_reviews);
+        RecyclerView recyclerReviews = findViewById(R.id.recycler_view_review);
         LinearLayoutManager layout_reviews = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerReviews.setLayoutManager(layout_reviews);
         final ReviewAdapter adapterReview = new ReviewAdapter();
@@ -154,11 +157,10 @@ public class MovieActivity extends AppCompatActivity {
                 .load(imageUrl)
                 .into(backdrop);
 
-        runtime.setText("Runtime: " + getIntent().getIntExtra("runtime", 0));
+        runtime.setText("Runtime: " + "-" + getIntent().getIntExtra("runtime", 0));
         releaseDate.setText("Release date: " + getIntent().getStringExtra("releaseDate"));
         popularity.setText("Popularity: " + getIntent().getDoubleExtra("popularity", 0));
         voteAverage.setText("Vote average: " + getIntent().getDoubleExtra("voteAverage", 0));
-
 
     }
 

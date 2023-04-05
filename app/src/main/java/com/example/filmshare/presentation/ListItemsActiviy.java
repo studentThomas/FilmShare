@@ -95,8 +95,6 @@ public class ListItemsActiviy extends AppCompatActivity {
                 List<Movie> movies = new ArrayList<>();
                 if(listItems.isEmpty()) {
                     Log.d("ListItemsActivity", "onCreate: listItems is empty");
-                    findViewById(R.id.textinput_genre).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.textinput_sort).setVisibility(View.INVISIBLE);
                     Toast.makeText(ListItemsActiviy.this, "List is empty", Toast.LENGTH_LONG).show();
 
                     return;
