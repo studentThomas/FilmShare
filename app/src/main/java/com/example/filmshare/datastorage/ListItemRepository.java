@@ -124,7 +124,6 @@ public class ListItemRepository {
         protected Void doInBackground(Integer... ids) {
             Log.d("ListRepository", "doInBackground deleting listitem: " + ids[0]);
             for (int id : ids) {
-                listItemDao.delete(id);
                 ListItem listItem = new ListItem(listId, id);
 
 
@@ -151,6 +150,7 @@ public class ListItemRepository {
                     public void onResponse(Call<ListItem> call, Response<ListItem> response) {
                         if (response.isSuccessful()) {
                             Log.d("ListRepository", "Success inserting listitem: " + response.body().toString());
+
                         } else {
                             Log.d("ListRepository", "Error inserting listitem: " + response.message());
                             Log.d("ListRepository", "Error inserting listitem: " + response.code());
@@ -164,6 +164,7 @@ public class ListItemRepository {
 
                 });
 
+                listItemDao.delete(id);
 
             }
 //            Gson gson = new GsonBuilder()

@@ -149,8 +149,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String text = adapterView.getItemAtPosition(i).toString();
                     selectedGenreid = genres.get(i).getId();
-                    int genreId = getIntent().getIntExtra("genreId", 0);
-                    movieViewModel.getMoviesByGenre(genreId).observe(MainActivity.this, moviesObserver);
+                    movieViewModel.getMoviesByGenre(selectedGenreid).observe(MainActivity.this, moviesObserver);
                 }
             });
         });
@@ -207,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return false;
             }
         });
-//        movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
+        movieViewModel.getAllMovies().observe(MainActivity.this, moviesObserver);
     }
 
         @Override
