@@ -182,10 +182,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     case "Lowest Rating":
                         sortBy = "vote_average.asc";
                         break;
-                    case "Oldest":
+                    case "Oldest Movies":
                         sortBy = "release_date.asc";
                         break;
-                    case "Newest":
+                    case "Newest Movies":
                         sortBy = "release_date.desc";
                         break;
                 }

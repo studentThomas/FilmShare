@@ -33,14 +33,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-<<<<<<< HEAD
                 android:rating="0"
-                android:stepSize="0.5" />
-=======
                 android:stepSize="0.5"
-                android:rating="0.0" />
->>>>>>> 473e2cb96b9e7511da3ba4e65810d34cc036581f
-
+                android:isIndicator="true"/>
 
 
             <View style="@style/seperator" />

@@ -81,11 +81,15 @@ public class MovieActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapterLists;
     private ListItemViewModel listItemViewModel;
 
+    private RatingBar ratingBar;
+
     private ReviewViewModel reviewViewModel;
 
     private ListViewModel listViewModel;
 
     private TextView title;
+
+    private Button giveRating;
 
     private int selectedListId = -1;
 
@@ -187,6 +191,21 @@ public class MovieActivity extends AppCompatActivity {
         popularity.setText(Html.fromHtml(popularityText));
         String voteAverageText = "<b>Vote average:</b> " + voteAverageString;
         voteAverage.setText(Html.fromHtml(voteAverageText));
+
+        giveRating = findViewById(R.id.add_review);
+        ratingBar = findViewById(R.id.ratingBar);
+        giveRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MovieActivity.this, MovieActivity.class);
+                intent.putExtra("id", getIntent().getIntExtra("id", 0));
+                float rating = ratingBar.getRating();
+                double doubleRating = (double) rating;
+                int movieId = getIntent().getIntExtra("id", 0);
+                reviewViewModel.rateMovie(movieId, doubleRating);
+                startActivity(intent);
+            }
+        });
 
     }
 
