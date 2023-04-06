@@ -124,7 +124,7 @@ public class MovieActivity extends AppCompatActivity {
         };
         int movieId = getIntent().getIntExtra("id", 0);
         reviewViewModel.getReviews(movieId).observe(this, reviewsObserver);
-        reviewViewModel.rateMovie(movieId, 7.5);
+//        reviewViewModel.rateMovie(movieId, 7.5);
 
         ListRepository listRepository = new ListRepository(getApplication());
 
@@ -193,17 +193,15 @@ public class MovieActivity extends AppCompatActivity {
         voteAverage.setText(Html.fromHtml(voteAverageText));
 
         giveRating = findViewById(R.id.add_review);
-        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar = findViewById(R.id.giveRatingBar);
+        ratingBar.setRating((float) voteAverageValue / 2);
         giveRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MovieActivity.this, MovieActivity.class);
-                intent.putExtra("id", getIntent().getIntExtra("id", 0));
                 float rating = ratingBar.getRating();
                 double doubleRating = (double) rating;
-                int movieId = getIntent().getIntExtra("id", 0);
+                Log.d("MovieActivity", "Rating: " + doubleRating);
                 reviewViewModel.rateMovie(movieId, doubleRating);
-                startActivity(intent);
             }
         });
 
