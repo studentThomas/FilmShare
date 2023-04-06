@@ -35,6 +35,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.author.setText(currentReview.getAuthor());
         holder.content.setText(currentReview.getContent());
         AuthorDetails authorDetails = currentReview.getAuthorDetails();
+
+        double rating = authorDetails.getRating();
+
+        float stars = (float) (rating / 2.0);
+        holder.rating.setRating(stars);
+
     }
 
     @Override
@@ -60,7 +66,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             super(itemView);
             author = itemView.findViewById(R.id.review_author);
             content = itemView.findViewById(R.id.review_content);
-            rating = itemView.findViewById(R.id.movie_ratingBar);
+            rating = itemView.findViewById(R.id.ratingBar);
 
         }
 
