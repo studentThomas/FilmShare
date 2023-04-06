@@ -29,12 +29,17 @@
                 android:textColor="#000000"
                 android:textSize="24sp" />
             <RatingBar
-                android:id="@+id/movie_ratingBar"
+                android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
+<<<<<<< HEAD
                 android:rating="0"
                 android:stepSize="0.5" />
+=======
+                android:stepSize="0.5"
+                android:rating="0.0" />
+>>>>>>> 473e2cb96b9e7511da3ba4e65810d34cc036581f
 
 
 
